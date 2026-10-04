@@ -92,7 +92,7 @@ button.btn{font:inherit;cursor:pointer;border:0}
     <a class="btn" id="cta" href="#" hidden>Get the link</a>
     <p id="ctaNote" class="muted">Comment <b>PATH</b> on my Instagram and I'll send you the link.</p>
     <div id="wl" hidden>
-      <p>Join the waitlist and get the link first when Build Smarter opens. The first 50 members to join get the $9 founding rate.</p>
+      <p>Join the waitlist and you'll be notified as soon as Build Smarter opens. The first 50 members to join the community get the $9 founding rate.</p>
       <form id="wlForm">
         <label for="wlEmail" class="muted">Your email</label>
         <input type="email" id="wlEmail" name="email" placeholder="you@example.com" autocomplete="email" required maxlength="120">
@@ -111,7 +111,7 @@ button.btn{font:inherit;cursor:pointer;border:0}
 <script>
 // ===== Settings: change these lines =====
 const MODE = "waitlist";  // "waitlist" until launch day, then change to "launch"
-const WAITLIST_URL = "https://buildsmarter-newsletter.beehiiv.com/"; // your beehiiv signup page (used until a form is wired in)
+const WAITLIST_URL = "https://buildsmarter-newsletter.beehiiv.com/?utm_source=offer-builder-waitlist"; // your beehiiv signup page (used until a form is wired in)
 const FORM_URL = "";      // your Formspree form link, like https://formspree.io/f/abcdwxyz
 const JOIN_URL = "";      // your Skool community link
 const SOURCE = "offer-builder";
@@ -218,7 +218,7 @@ function setupCta(){
   cta.hidden = true; wl.hidden = true; note.hidden = false; f.hidden = false; msg.textContent = ""; f.querySelector("button").disabled = false;
   if (MODE === "launch" && JOIN_URL) { cta.href = JOIN_URL; cta.textContent = "Join Build Smarter"; cta.hidden = false; note.hidden = true; }
   else if (MODE === "waitlist" && FORM_URL) { wl.hidden = false; note.hidden = true; }
-  else if (MODE === "waitlist" && WAITLIST_URL) { cta.href = WAITLIST_URL; cta.target = "_blank"; cta.rel = "noopener"; cta.textContent = "Join the waitlist"; cta.hidden = false; note.hidden = false; note.innerHTML = "Join the waitlist to get the link first when Build Smarter opens. The first 50 members to join get the $9 founding rate."; }
+  else if (MODE === "waitlist" && WAITLIST_URL) { cta.href = WAITLIST_URL; cta.target = "_blank"; cta.rel = "noopener"; cta.textContent = "Join the waitlist"; cta.hidden = false; note.hidden = false; note.innerHTML = "This adds you to Build Smarter Weekly, my free weekly email, and you'll be notified as soon as the Build Smarter community opens. The first 50 members to join the community get the $9 founding rate."; }
 }
 document.getElementById("wlForm").addEventListener("submit", async e => {
   e.preventDefault();
