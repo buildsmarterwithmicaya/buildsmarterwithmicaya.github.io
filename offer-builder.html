@@ -49,6 +49,7 @@ button.btn{font:inherit;cursor:pointer;border:0}
 .btn:disabled{opacity:.4;cursor:default}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
 #wl label{display:block;margin-bottom:6px;font-size:.95rem}
+.btn2{display:inline-block;background:none;color:var(--accent);border:2px solid var(--accent);border-radius:10px;padding:12px 20px;font-weight:700;text-decoration:none}.btn2:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 </style>
 </head>
 <body>
@@ -90,16 +91,18 @@ button.btn{font:inherit;cursor:pointer;border:0}
   <textarea id="rPrompt" rows="7" readonly></textarea>
   <button class="btn" id="copyPrompt">Copy AI prompt</button>
   <div class="box">
-    <h2 style="font-size:1.3rem">Get Build Smarter Weekly</h2>
-    <p>Five things in AI and creator news, what they mean for you, and one idea to try. Free, once a week.</p>
-    <a class="btn" id="nlBtn" href="#" target="_blank" rel="noopener">Sign up for the newsletter</a>
-    <p class="muted" id="preLaunch" style="margin-top:12px">You'll also get an email the moment the Build Smarter community opens on October 26. The first 50 members get the $9 founding rate.</p>
+    <span class="tag">Doors are open</span>
+    <h2 style="font-size:1.3rem">Want help turning this into a 30-day plan?</h2>
+    <p>In 14 days inside the Build Smarter community, you'll choose your path, define who you help, build your starter offer, and map your next 30 days.</p>
+    <p>Inside: the 14-Day Online Income Pathway, Income Path Spotlights, the AI Trending Hub, a Resource Vault of prompts and templates, and a community cheering you on.</p>
+    <a class="btn" id="joinBtn" href="https://www.skool.com/build-smarter-with-micaya-3773/about" target="_blank" rel="noopener">Join Build Smarter</a>
+    <p class="muted" style="margin-top:12px">$9/month for the first 50 founding members. Month to month, cancel anytime.</p>
+    <p class="muted"><b>Already a member?</b> Head to the Classroom in the community for your next steps.</p>
   </div>
   <div class="box">
-    <h2 style="font-size:1.3rem">Want help turning this into a 30-day plan?</h2>
-    <p>Inside the Build Smarter community, you choose your path, define who you help, build a starter offer, and map your next 30 days.</p>
-    <p><b>Already a member?</b> Great! Head to the Classroom in the community for your next steps.</p>
-    <p id="joinLine"><b>Not a member yet?</b> <a id="joinLink" href="#" target="_blank" rel="noopener" style="color:var(--accent)">Join the Build Smarter community</a></p>
+    <h2 style="font-size:1.3rem">Get Build Smarter Weekly</h2>
+    <p>Five things in AI and creator news, what they mean for you, and one idea to try. Free, once a week.</p>
+    <a class="btn2" id="nlBtn" href="#" target="_blank" rel="noopener">Sign up for the newsletter</a>
   </div>
   <button class="link" id="again">Start over</button>
   <p class="fine">These are ideas to help you get started, not financial advice. Online income is never guaranteed.</p>
@@ -109,7 +112,7 @@ button.btn{font:inherit;cursor:pointer;border:0}
 <script>
 // ===== Settings: change these lines =====
 const NEWSLETTER_URL = "https://buildsmarter-newsletter.beehiiv.com/?utm_source=offer-builder"; // beehiiv signup page
-const JOIN_URL = "";      // paste your Skool community link here
+const JOIN_URL = "https://www.skool.com/build-smarter-with-micaya-3773/about";
 const LAUNCH = new Date("2026-10-26T00:00:00-04:00"); // pre-launch line hides itself after this
 // ========================================
 
@@ -210,10 +213,6 @@ $("copyPrompt").onclick = () => copyText($("copyPrompt"), () => st.prompt);
 
 function setupCta(){
   document.getElementById("nlBtn").href = NEWSLETTER_URL;
-  document.getElementById("preLaunch").hidden = new Date() >= LAUNCH;
-  const j = document.getElementById("joinLink");
-  if (JOIN_URL) { j.href = JOIN_URL; document.getElementById("joinLine").hidden = false; }
-  else document.getElementById("joinLine").hidden = true;
 }
 </script>
 </body>
