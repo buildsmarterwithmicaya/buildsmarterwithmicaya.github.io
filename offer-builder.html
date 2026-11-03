@@ -71,7 +71,7 @@ a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{ou
 
 <section id="intro">
   <h1>Turn your idea into a clear first offer</h1>
-  <p>Know your income path but not what to actually build? Answer eight short questions. Pick examples, adapt them, or write your own. You get an offer statement, name ideas, a 4-week plan, and a message to send your first 5 people.</p>
+  <p>Know your income path but not what to actually build? Answer seven short questions. Pick examples, adapt them, or write your own. You get an offer statement, name ideas, a 4-week plan, and a message to send your first 5 people.</p>
   <p class="tip"><b>Tip:</b> be as specific as you can. The more specific your answers, the more specific and useful your offer statement will be. "Moms who want to cook healthy dinners in 20 minutes" beats "people who want to eat better."</p>
   <p id="carry" class="muted"></p><button class="btn" id="start">Build my offer</button>
 </section>
@@ -93,7 +93,6 @@ a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{ou
   <ul id="rNames"></ul>
   <h2 style="font-size:1.2rem">What to put inside</h2>
   <ul id="rInside"></ul>
-  <div id="rAngleBox"><h2 style="font-size:1.2rem">Your angle</h2><p id="rAngle"></p></div>
   <div class="takeaway"><h2>Your smallest useful test</h2>
   <p id="pilot"></p><p id="evidence"></p></div>
   <h2 style="font-size:1.2rem">Your first 4 weeks</h2>
@@ -151,7 +150,6 @@ const STEPS = [
  {q:"Who do you want to help?",t:"x",k:"aud",ph:"e.g. stay-at-home moms",tip:"Narrow it down. Instead of \"moms,\" try \"new moms going back to work\" or \"stay-at-home moms who want a side income.\"",chips:["parents planning dinners for picky eaters","shop owners posting their own product photos","freelancers preparing their first client proposal","new creators filming with a phone","career changers updating their résumé","students managing their first monthly budget"]},
  {q:"What's your skill, interest or topic?",t:"x",k:"topic",ph:"e.g. baking, budgeting, Canva, fitness",chips:["budgeting and saving","meal planning","home workouts","Canva design","social media content","AI tools for beginners","organization and planning","parenting","baking","personal finance","resume and job search","language learning"],tip:"Go one level deeper. Instead of \"fitness,\" try \"15-minute home workouts.\""},
  {q:"What result do you want them to get?",t:"x",k:"result",ph:"e.g. plan a week of meals in one hour",chips:["publish their first product listing","plan a week of meals in one hour","finish a weekly plan in one sitting","send a first offer to one potential customer","build a simple daily routine","create content without burning out","draft a customer reply they can reuse","stick to a budget"],tip:"Name a result they can picture, ideally with a number or a timeframe."},
- {q:"What makes you the right person to help? (optional)",t:"x",k:"angle",ph:"e.g. I fed my family of 4 on a tight budget",chips:["I learned it the hard way","I did it while raising kids","I use this in my own routine","I started as a complete beginner","I tested two ways of doing this"],opt:true},
  {q:"Where do they get stuck right now?",t:"x",k:"prob",ph:"Example: choosing dinners that use what’s already in the fridge",tip:"Describe a moment when the problem shows up. Use their words if you have them.",chips:["I don’t know what to do first","I start but can’t keep it going","I spend too long choosing","I keep redoing the same task"]},
  {q:"What evidence do you have that someone wants help?",t:"c",k:"proof",o:[["It’s an idea I haven’t checked yet","idea"],["Someone described this problem to me","heard"],["Someone tried a sample or asked for help","tried"],["Someone has paid for help with this problem","paid"]]},
  {q:"How do you want to help them get there?",t:"f",k:"fmt",tip:"Pick the way you would enjoy helping most. You can decide how and whether to charge later. Start with the help, not the price."}
@@ -235,16 +233,14 @@ function finish(){
   };
   $("pilot").textContent=tests[st.path];
   $("evidence").textContent=proofAdvice[st.proof]+" A useful signal is a specific next action: they use it again, request a change, or ask how to get the finished version.";
-  $("rAngle").textContent = st.angle ? "Lead with this: " + st.angle + ". It shows why you understand their problem, so put it in your first line." : "";
-  $("rAngleBox").hidden = !st.angle;
   const wk = $("rWeeks"); wk.textContent = "";
   ["Week 1: "+proofAdvice[st.proof],
    "Week 2: Build the smallest version: " + f[3] + ". Finish it, even if it's rough.",
    "Week 3: Share it with 3 to 5 people and ask what was confusing or missing.",
    "Week 4: Fix what they told you, then share it publicly."].forEach(t => li(wk, t));
-  st.msg = "Hi! I'm working on something to help " + a + " " + st.result + ", using " + f[1] + (st.angle ? " (" + st.angle + ")" : "") + ". Could I ask you 2 quick questions? When was the last time you ran into this: “" + st.prob + "”? What did you try?";
+  st.msg = "Hi! I'm working on something to help " + a + " " + st.result + ", using " + f[1] + ". Could I ask you 2 quick questions? When was the last time you ran into this: “" + st.prob + "”? What did you try?";
   $("rMsg").textContent = st.msg;
-  st.prompt = "Act as a friendly business coach for beginners. I want to create " + f[1] + " as my first " + p.n.toLowerCase() + " offer. Who I help: " + a + ". Topic: " + st.topic + ". The result I want them to get: " + st.result + ". The sticking point they described: " + st.prob + ". " + (st.angle ? "My background: " + st.angle + ". " : "") + "What I know about demand: "+STEPS.find(x=>x.k==="proof").o.find(o=>o[1]===st.proof)[0]+". Separate evidence from guesses and ask two clarifying questions before drafting. Give me: 1) three specific offer ideas with names, 2) what to include in the smallest version, 3) a simple 4-week plan to build and test it, and 4) five questions to ask my first customers. Keep it practical and beginner-friendly, and do not promise income results.";
+  st.prompt = "Act as a friendly business coach for beginners. I want to create " + f[1] + " as my first " + p.n.toLowerCase() + " offer. Who I help: " + a + ". Topic: " + st.topic + ". The result I want them to get: " + st.result + ". The sticking point they described: " + st.prob + ". " + "What I know about demand: "+STEPS.find(x=>x.k==="proof").o.find(o=>o[1]===st.proof)[0]+". Separate evidence from guesses and ask two clarifying questions before drafting. Give me: 1) three specific offer ideas with names, 2) what to include in the smallest version, 3) a simple 4-week plan to build and test it, and 4) five questions to ask my first customers. Keep it practical and beginner-friendly, and do not promise income results.";
   $("rPrompt").value = st.prompt;
   setupCta();
   $("copy").textContent = "Copy my statement"; $("copyMsg").textContent = "Copy message"; $("copyPrompt").textContent = "Copy AI prompt";
