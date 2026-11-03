@@ -92,6 +92,8 @@ a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{ou
   <h1 style="font-size:1.6rem">Your offer statement</h1>
   <p class="stmt" id="rStmt"></p>
   <button class="link" id="copy">Copy my statement</button>
+  <div class="takeaway"><h2>Your smallest useful test</h2>
+  <p id="pilot"></p><p id="evidence"></p></div>
   <section class="name-studio" aria-labelledby="name-heading">
     <h2 id="name-heading">Name your offer</h2>
     <p>Try five names inspired by your offer. Pick a favorite, or change a detail and try again.</p>
@@ -105,8 +107,7 @@ a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{ou
   </section>
   <h2 style="font-size:1.2rem">What to put inside</h2>
   <ul id="rInside"></ul>
-  <div class="takeaway"><h2>Your smallest useful test</h2>
-  <p id="pilot"></p><p id="evidence"></p></div>
+
   <h2 style="font-size:1.2rem">Your first 4 weeks</h2>
   <ol id="rWeeks"></ol>
   <h2 style="font-size:1.2rem">Message to send your first 5 people</h2>
@@ -302,14 +303,21 @@ function finish(){
     s:"Do one small piece of the service for one tester. Agree on what finished looks like first. Afterwards, ask which part they would hire you to do again.",
     a:"Show one person two options you have used for "+st.topic+". Ask which they would choose, why, and what detail your comparison left out."
   };
-  $("pilot").textContent=tests[st.path];
-  $("evidence").textContent=proofAdvice[st.proof]+" A useful signal is a specific next action: they use it again, request a change, or ask how to get the finished version.";
+  $("pilot").textContent="First: "+proofAdvice[st.proof];
+  $("evidence").textContent="Then: "+tests[st.path];
   const wk = $("rWeeks"); wk.textContent = "";
   ["Week 1: "+proofAdvice[st.proof],
    "Week 2: Build the smallest version: " + f[3] + ". Finish it, even if it's rough.",
    "Week 3: Share it with 3 to 5 people and ask what was confusing or missing.",
    "Week 4: Fix what they told you, then share it publicly."].forEach(t => li(wk, t));
-  st.msg = "Hi! I'm working on something to help " + a + " " + st.result + ", using " + f[1] + ". Could I ask you 2 quick questions? When was the last time you ran into this: “" + st.prob + "”? What did you try?";
+  const topicIndex=examplesByTopic.findIndex(row=>row[1]===st.topic);
+  const audienceIndex=examplesByTopic.findIndex(row=>row[0]===a);
+  const audience=["small business owners","creators","online sellers","freelancers","local businesses","independent business owners"][audienceIndex]||a;
+  const format=st.fmt==="custom"?st.customFmt:formatNames[st.path][st.fmt][0].toLowerCase();
+  const about=["planning social posts","editing short videos","writing product listings","following up on emails","making graphics in Canva","organizing expenses"][topicIndex]||st.topic;
+  const question=["When you planned your posts last week, what took the most time?","When you last cut a short clip, which part took the longest?","What was hardest about the last product listing you wrote?","When did a client follow-up last slip through the cracks?","What slowed you down the last time you made a graphic?","What took the most time when you last sorted your expenses?"][topicIndex]||"What took the most time the last time you worked on this?";
+  const lead=st.path==="d" && st.fmt===0 && topicIndex===0?"I’m putting together a weekly posting template for "+audience+".":st.fmt==="custom"?"I’m working on something for "+audience+" around "+about+". The idea: "+st.customFmt+".":"I’m working on "+(/^[aeiou]/i.test(format)?"an ":"a ")+format+" for "+audience+" around "+about+".";
+  st.msg=lead+" "+question+" I’d love to know what you already use.";
   $("rMsg").textContent = st.msg;
   st.prompt = "Act as a friendly business coach for beginners. I want to create " + f[1] + " as my first " + p.n.toLowerCase() + " offer. Who I help: " + a + ". Topic: " + st.topic + ". The result I want them to get: " + st.result + ". The sticking point they described: " + st.prob + ". " + "What I know about demand: "+STEPS.find(x=>x.k==="proof").o.find(o=>o[1]===st.proof)[0]+". Separate evidence from guesses and ask two clarifying questions before drafting. Give me: 1) three ways to refine this offer, 2) what to include in the smallest version, 3) a simple 4-week plan to build and test it, and 4) five questions to ask my first customers. Keep it practical and beginner-friendly, and do not promise income results.";
   $("rPrompt").value = st.prompt;
@@ -327,7 +335,21 @@ $("copy").onclick = () => copyText($("copy"), () => st.text);
 $("copyMsg").onclick = () => copyText($("copyMsg"), () => st.msg);
 $("copyPrompt").onclick = () => copyText($("copyPrompt"), () => st.prompt);
 
-const nameEndings={c:["Circle","Club","Collective"],d:["Kit","Planner","Playbook"],s:["Studio","Desk","Service"],a:["Picks","Field Guide","Shortlist"],y:["Series","Sessions","Channel"]};
+const formatNames={
+  c:[["Practice Circle","Club","Community"],["Challenge","Sprint","Challenge Series"],["Peer Circle","Group","Club"]],
+  y:[["Video Series","Channel","Video Collection"],["Video Digest","Channel","Series"],["Tutorial Series","Playlist","Walkthrough"]],
+  d:[["Template Kit","Template Collection","Template Pack"],["Guide","Handbook","Field Guide"],["Planner","Checklist","Planning Pad"]],
+  s:[["Service","Studio","Desk"],["Review","Feedback Session","Critique"],["Setup Service","Setup Package","Setup Session"]],
+  a:[["Shortlist","Picks","Roundup"],["Walkthrough","Demo Guide","Field Notes"],["Comparison Guide","Side-by-Side Guide","Buyer’s Guide"]]
+};
+function namingEndings(){
+  if(st.fmt!=="custom")return formatNames[st.path][st.fmt];
+  const value=st.customFmt;
+  for(const [pattern,terms] of [[/template/i,formatNames.d[0]],[/workshop/i,["Workshop","Practice Session","Live Lab"]],[/planner|checklist/i,formatNames.d[2]],[/guide|handbook/i,formatNames.d[1]]]){
+    if(pattern.test(value))return terms;
+  }
+  return ["Original","Essentials","Edition"];
+}
 let recentNames=new Set(), chosenName="", basePrompt="";
 function nameCase(text){return text.trim().replace(/(^|\s)(\p{Ll})/gu,(_,gap,c)=>gap+c.toUpperCase());}
 function mix(values){
@@ -346,7 +368,7 @@ function generateNames(){
   const raw=$("name-topic").value.trim()||st.topic, topic=nameCase(raw), owner=$("name-owner").value.trim();
   const words=[...new Set($("name-words").value.split(/[,;]+/).map(nameCase).filter(Boolean))].slice(0,4);
   const theme=examplesByTopic.find(row=>row[1].toLowerCase()===raw.toLowerCase());
-  const roots=[...new Set([...(theme?theme.slice(4):[]),topic])], ends=nameEndings[st.path];
+  const roots=[...new Set([...(theme?theme.slice(4):[]),topic])], ends=namingEndings();
   const families=[[],[],[],[],[]];
   for(const root of roots){
     for(const end of ends)families[0].push(root+" "+end);
@@ -354,7 +376,7 @@ function generateNames(){
     for(const word of words.length?words:["Sunday","Day One","Weekly"])families[2].push(word+" • "+root,root+" | "+word+" Edition");
     for(const suffix of ["in Practice","from Scratch","Step by Step","in Focus","in Action","Unpacked"])families[3].push(root+" "+suffix);
     if(owner){for(const end of ["with "+owner,"by "+owner,"— "+owner+" Edition"])families[4].push(root+" "+end);for(const end of ends)families[4].push(owner+"’s "+root+" "+end);}
-    else for(const end of ["Workshop","Notebook","Quick Start","Companion","Blueprint","Pocket Guide"])families[4].push("The "+root+" "+end);
+    else for(const end of ends)families[4].push("The "+root+" "+end);
   }
   const previous=new Set(Array.from($("rNames").children,b=>b.textContent));
   const penalty=n=>2*Number(previous.has(n))+Number(recentNames.has(n));
