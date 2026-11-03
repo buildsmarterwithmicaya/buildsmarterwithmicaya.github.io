@@ -62,6 +62,9 @@ button.btn{font:inherit;cursor:pointer;border:0}
 .field-label{display:block;margin:12px 0 6px;font-weight:650}
 select.examples{width:100%;min-height:48px;border:1px solid var(--muted);border-radius:10px;padding:10px;background:var(--bg);color:var(--ink);font:inherit}
 a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.name-studio{background:var(--surface);padding:clamp(16px,4vw,24px);border:1px solid var(--line);border-radius:16px;margin:24px 0}
+.name-studio label{display:block;font-weight:650;margin:12px 0 5px}.name-studio input{width:100%}.name-studio .btn{margin:8px 0 18px}.name-studio .opt{background:var(--bg);margin:6px 0}
+.name-studio .opt[aria-pressed="true"]{border-color:var(--accent);color:var(--accent)}#name-status{margin:12px 0 0;color:var(--muted)}
 </style>
 </head>
 <body>
@@ -72,7 +75,7 @@ a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{ou
 <section id="intro">
   <h1>Turn your idea into a clear first offer</h1>
   <p>Know your income path but not what to actually build? Answer seven short questions. Pick examples, adapt them, or write your own. You get an offer statement, name ideas, a 4-week plan, and a message to send your first 5 people.</p>
-  <p class="tip"><b>Tip:</b> be as specific as you can. The more specific your answers, the more specific and useful your offer statement will be. "Moms who want to cook healthy dinners in 20 minutes" beats "people who want to eat better."</p>
+  <p class="tip"><b>Tip:</b> be as specific as you can. The more specific your answers, the more specific and useful your offer statement will be. “Shop owners writing their first product listing” gives you more to work with than “small businesses.”</p>
   <p id="carry" class="muted"></p><button class="btn" id="start">Build my offer</button>
 </section>
 
@@ -89,8 +92,17 @@ a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{ou
   <h1 style="font-size:1.6rem">Your offer statement</h1>
   <p class="stmt" id="rStmt"></p>
   <button class="link" id="copy">Copy my statement</button>
-  <h2 style="font-size:1.2rem;margin-top:18px">Name ideas</h2>
-  <ul id="rNames"></ul>
+  <section class="name-studio" aria-labelledby="name-heading">
+    <h2 id="name-heading">Name your offer</h2>
+    <p>Try five names inspired by your offer. Pick a favorite, or change a detail and try again.</p>
+    <label for="name-topic">What are you naming?</label><input id="name-topic" type="text" maxlength="80" placeholder="Example: weekly content planner">
+    <label for="name-owner">Your name or brand (optional)</label><input id="name-owner" type="text" maxlength="40" placeholder="Example: Micaya">
+    <label for="name-words">Words you’d like to use (optional)</label><input id="name-words" type="text" maxlength="90" placeholder="Example: Sunday, batch, studio">
+    <button type="button" class="btn" id="name-more">Generate five names</button>
+    <div id="rNames" aria-label="Suggested offer names"></div>
+    <p id="name-status" aria-live="polite"></p>
+    <button type="button" class="link" id="name-clear" hidden>Clear my choice</button>
+  </section>
   <h2 style="font-size:1.2rem">What to put inside</h2>
   <ul id="rInside"></ul>
   <div class="takeaway"><h2>Your smallest useful test</h2>
@@ -145,12 +157,68 @@ const PATHS = {
 };
 const OUT = {start:"get started",steady:"stay consistent",time:"save time",calm:"feel less overwhelmed",first:"find their first customers"};
 
+const examplesByTopic = [
+  [
+    "small business owners planning their social posts",
+    "social media content planning",
+    "plan a week of social posts in one sitting",
+    "I open the app and don’t know what to post",
+    "Content Calendar",
+    "Post & Plan",
+    "Posting Rhythm"
+  ],
+  [
+    "creators turning long videos into short clips",
+    "short-form video editing",
+    "turn one recording into three short clips",
+    "I don’t know which moments to keep",
+    "Clip Edit",
+    "Cut to Short",
+    "Highlight Reel"
+  ],
+  [
+    "online sellers writing their own product listings",
+    "product listing copy",
+    "publish a product listing that answers buyers’ questions",
+    "I can list features but struggle to explain why they matter",
+    "Listing Lab",
+    "Shelf Ready",
+    "Product Story"
+  ],
+  [
+    "freelancers keeping up with client emails",
+    "inbox organization and follow-up",
+    "set up a repeatable client follow-up routine",
+    "I lose track of who needs a reply",
+    "Inbox Reset",
+    "Reply Rhythm",
+    "Follow-Up Desk"
+  ],
+  [
+    "local businesses making their own graphics",
+    "Canva graphics for small businesses",
+    "make three reusable branded post templates",
+    "Every graphic starts from a blank page",
+    "Design Desk",
+    "Brand in Frame",
+    "Canvas to Content"
+  ],
+  [
+    "independent business owners tracking expenses",
+    "spreadsheet organization",
+    "organize a month of expenses in one spreadsheet",
+    "My receipts and totals are in different places",
+    "Sheet Sense",
+    "Tidy Ledger",
+    "Numbers in Order"
+  ]
+];
 const STEPS = [
  {q:"How do you want to help people?",tip:"A service means doing a task for one person. A digital product is a resource people use themselves. Choose the closest fit; you can go back.",t:"c",o:[["Communities and memberships","c"],["YouTube and content","y"],["Digital products","d"],["Services and freelancing","s"],["Affiliate: recommend products you use","a"]],k:"path"},
- {q:"Who do you want to help?",t:"x",k:"aud",ph:"e.g. stay-at-home moms",tip:"Narrow it down. Instead of \"moms,\" try \"new moms going back to work\" or \"stay-at-home moms who want a side income.\"",chips:["parents planning dinners for picky eaters","shop owners posting their own product photos","freelancers preparing their first client proposal","new creators filming with a phone","career changers updating their résumé","students managing their first monthly budget"]},
- {q:"What's your skill, interest or topic?",t:"x",k:"topic",ph:"e.g. baking, budgeting, Canva, fitness",chips:["budgeting and saving","meal planning","home workouts","Canva design","social media content","AI tools for beginners","organization and planning","parenting","baking","personal finance","resume and job search","language learning"],tip:"Go one level deeper. Instead of \"fitness,\" try \"15-minute home workouts.\""},
- {q:"What result do you want them to get?",t:"x",k:"result",ph:"e.g. plan a week of meals in one hour",chips:["publish their first product listing","plan a week of meals in one hour","finish a weekly plan in one sitting","send a first offer to one potential customer","build a simple daily routine","create content without burning out","draft a customer reply they can reuse","stick to a budget"],tip:"Name a result they can picture, ideally with a number or a timeframe."},
- {q:"Where do they get stuck right now?",t:"x",k:"prob",ph:"Example: choosing dinners that use what’s already in the fridge",tip:"Describe a moment when the problem shows up. Use their words if you have them.",chips:["I don’t know what to do first","I start but can’t keep it going","I spend too long choosing","I keep redoing the same task"]},
+ {q:"Who do you want to help?",t:"x",k:"aud",ph:"e.g. local shop owners",tip:"Think of one person and the task on their desk. Example: a shop owner taking product photos between customers.",chips:examplesByTopic.map(row=>row[0])},
+ {q:"What's your skill, interest or topic?",t:"x",k:"topic",ph:"e.g. baking, budgeting, Canva, fitness",chips:examplesByTopic.map(row=>row[1]),tip:"Go one level deeper. Instead of \"fitness,\" try \"15-minute home workouts.\""},
+ {q:"What result do you want them to get?",t:"x",k:"result",ph:"e.g. plan five posts before Monday",chips:examplesByTopic.map(row=>row[2]),tip:"Name a result they can picture, ideally with a number or a timeframe."},
+ {q:"Where do they get stuck right now?",t:"x",k:"prob",ph:"Example: I know my topic but never know how to start the caption",tip:"Describe a moment when the problem shows up. Use their words if you have them.",chips:examplesByTopic.map(row=>row[3])},
  {q:"What evidence do you have that someone wants help?",t:"c",k:"proof",o:[["It’s an idea I haven’t checked yet","idea"],["Someone described this problem to me","heard"],["Someone tried a sample or asked for help","tried"],["Someone has paid for help with this problem","paid"]]},
  {q:"How do you want to help them get there?",t:"f",k:"fmt",tip:"Pick the way you would enjoy helping most. You can decide how and whether to charge later. Start with the help, not the price."}
 ];
@@ -198,7 +266,12 @@ function render(){
   pickerLabel.className="field-label"; pickerLabel.htmlFor="examples"; pickerLabel.textContent="Need an idea? Choose an example";
   const picker=document.createElement("select"); picker.id="examples"; picker.className="examples";
   const placeholder=document.createElement("option"); placeholder.value=""; placeholder.textContent="Browse examples…"; picker.appendChild(placeholder);
-  const suggestions=s.chips;
+  const suggestions=[...s.chips];
+  const related=examplesByTopic.find(row=>row[1]===st.topic)||examplesByTopic.find(row=>row[0]===st.aud);
+  if(related && ["topic","result","prob"].includes(s.k)){
+    const first=related[{topic:1,result:2,prob:3}[s.k]];
+    suggestions.splice(suggestions.indexOf(first),1);suggestions.unshift(first);
+  }
   suggestions.forEach(example=>{const option=document.createElement("option");option.value=example;option.textContent=example;picker.appendChild(option);});
   picker.value=suggestions.includes(inp.value)?inp.value:"";
   const editLabel=document.createElement("label");editLabel.className="field-label";editLabel.htmlFor="your-answer";editLabel.textContent="Your answer — write your own or edit an example";
@@ -220,8 +293,6 @@ function finish(){
   $("rTag").textContent = p.n + " offer";
   st.text = "I help " + a + " " + st.result + " with " + f[1] + ".";
   $("rStmt").textContent = st.text;
-  const names = $("rNames"); names.textContent = "";
-  [ "The " + T + " Starter " + noun, T + " Made Simple", "The " + T + " Field Notes" ].forEach(n => li(names, n));
   const inside = $("rInside"); inside.textContent = "";
   ["Start with "+f[3]+".", "Show one worked example for "+a+" that addresses this sticking point: “"+st.prob+"”.", "Give the tester one task: try to "+st.result+". Ask where they needed help."].forEach(t=>li(inside,t));
   const tests={
@@ -240,8 +311,9 @@ function finish(){
    "Week 4: Fix what they told you, then share it publicly."].forEach(t => li(wk, t));
   st.msg = "Hi! I'm working on something to help " + a + " " + st.result + ", using " + f[1] + ". Could I ask you 2 quick questions? When was the last time you ran into this: “" + st.prob + "”? What did you try?";
   $("rMsg").textContent = st.msg;
-  st.prompt = "Act as a friendly business coach for beginners. I want to create " + f[1] + " as my first " + p.n.toLowerCase() + " offer. Who I help: " + a + ". Topic: " + st.topic + ". The result I want them to get: " + st.result + ". The sticking point they described: " + st.prob + ". " + "What I know about demand: "+STEPS.find(x=>x.k==="proof").o.find(o=>o[1]===st.proof)[0]+". Separate evidence from guesses and ask two clarifying questions before drafting. Give me: 1) three specific offer ideas with names, 2) what to include in the smallest version, 3) a simple 4-week plan to build and test it, and 4) five questions to ask my first customers. Keep it practical and beginner-friendly, and do not promise income results.";
+  st.prompt = "Act as a friendly business coach for beginners. I want to create " + f[1] + " as my first " + p.n.toLowerCase() + " offer. Who I help: " + a + ". Topic: " + st.topic + ". The result I want them to get: " + st.result + ". The sticking point they described: " + st.prob + ". " + "What I know about demand: "+STEPS.find(x=>x.k==="proof").o.find(o=>o[1]===st.proof)[0]+". Separate evidence from guesses and ask two clarifying questions before drafting. Give me: 1) three ways to refine this offer, 2) what to include in the smallest version, 3) a simple 4-week plan to build and test it, and 4) five questions to ask my first customers. Keep it practical and beginner-friendly, and do not promise income results.";
   $("rPrompt").value = st.prompt;
+  startNames();
   setupCta();
   $("copy").textContent = "Copy my statement"; $("copyMsg").textContent = "Copy message"; $("copyPrompt").textContent = "Copy AI prompt";
   show("result");
@@ -254,6 +326,50 @@ const copyText = async (btn, get) => { try { await navigator.clipboard.writeText
 $("copy").onclick = () => copyText($("copy"), () => st.text);
 $("copyMsg").onclick = () => copyText($("copyMsg"), () => st.msg);
 $("copyPrompt").onclick = () => copyText($("copyPrompt"), () => st.prompt);
+
+const nameEndings={c:["Circle","Club","Collective"],d:["Kit","Planner","Playbook"],s:["Studio","Desk","Service"],a:["Picks","Field Guide","Shortlist"],y:["Series","Sessions","Channel"]};
+let recentNames=new Set(), chosenName="", basePrompt="";
+function nameCase(text){return text.trim().replace(/(^|\s)(\p{Ll})/gu,(_,gap,c)=>gap+c.toUpperCase());}
+function mix(values){
+  const out=[...values];
+  for(let i=out.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[out[i],out[j]]=[out[j],out[i]];}
+  return out;
+}
+function syncChoice(){
+  $("name-status").textContent=chosenName?"Your pick: "+chosenName+" · Included in your AI prompt.":"Choose any name to add it to your AI prompt.";
+  $("name-clear").hidden=!chosenName;
+  st.prompt=basePrompt+(chosenName?" My chosen offer name is “"+chosenName+"”. Keep that name.":"");
+  $("rPrompt").value=st.prompt;
+  for(const button of $("rNames").children)button.setAttribute("aria-pressed",String(button.textContent===chosenName));
+}
+function generateNames(){
+  const raw=$("name-topic").value.trim()||st.topic, topic=nameCase(raw), owner=$("name-owner").value.trim();
+  const words=[...new Set($("name-words").value.split(/[,;]+/).map(nameCase).filter(Boolean))].slice(0,4);
+  const theme=examplesByTopic.find(row=>row[1].toLowerCase()===raw.toLowerCase());
+  const roots=[...new Set([...(theme?theme.slice(4):[]),topic])], ends=nameEndings[st.path];
+  const families=[[],[],[],[],[]];
+  for(const root of roots){
+    for(const end of ends)families[0].push(root+" "+end);
+    for(const prefix of ["Everyday","First Steps in","A Fresh Start in","Hands-On"])families[1].push(prefix+" "+root);
+    for(const word of words.length?words:["Sunday","Day One","Weekly"])families[2].push(word+" • "+root,root+" | "+word+" Edition");
+    for(const suffix of ["in Practice","from Scratch","Step by Step","in Focus","in Action","Unpacked"])families[3].push(root+" "+suffix);
+    if(owner){for(const end of ["with "+owner,"by "+owner,"— "+owner+" Edition"])families[4].push(root+" "+end);for(const end of ends)families[4].push(owner+"’s "+root+" "+end);}
+    else for(const end of ["Workshop","Notebook","Quick Start","Companion","Blueprint","Pocket Guide"])families[4].push("The "+root+" "+end);
+  }
+  const previous=new Set(Array.from($("rNames").children,b=>b.textContent));
+  const penalty=n=>2*Number(previous.has(n))+Number(recentNames.has(n));
+  const fresh=family=>mix(family).sort((a,b)=>penalty(a)-penalty(b));
+  const names=[];
+  for(const family of families){names.push(fresh(family).find(n=>!names.includes(n)));}
+  names.forEach(n=>recentNames.add(n));const list=$("rNames");list.textContent="";
+  for(const name of names){const b=document.createElement("button");b.type="button";b.className="opt";b.textContent=name;b.onclick=()=>{chosenName=name;syncChoice();};list.appendChild(b);}
+  syncChoice();
+}
+function startNames(){
+  recentNames=new Set();chosenName="";basePrompt=st.prompt;
+  $("name-topic").value=st.topic;$("name-owner").value="";$("name-words").value="";
+  $("name-more").onclick=generateNames;$("name-clear").onclick=()=>{chosenName="";syncChoice();};generateNames();
+}
 
 function setupCta(){
   document.getElementById("nlBtn").href = NEWSLETTER_URL;
