@@ -58,9 +58,9 @@ button.btn{font:inherit;cursor:pointer;border:0}
 
 <section id="intro">
   <h1>Turn your idea into a clear first offer</h1>
-  <p>Know your income path but not what to actually build? Answer 7 quick questions in your own words. You get an offer statement, name ideas, a 4-week plan, and a message to send your first 5 people.</p>
+  <p>Know your income path but not what to actually build? Answer eight short questions. Pick examples, adapt them, or write your own. You get an offer statement, name ideas, a 4-week plan, and a message to send your first 5 people.</p>
   <p class="tip"><b>Tip:</b> be as specific as you can. The more specific your answers, the more specific and useful your offer statement will be. "Moms who want to cook healthy dinners in 20 minutes" beats "people who want to eat better."</p>
-  <button class="btn" id="start">Build my offer</button>
+  <p id="carry" class="muted"></p><button class="btn" id="start">Build my offer</button>
 </section>
 
 <section id="quiz" hidden>
@@ -81,6 +81,8 @@ button.btn{font:inherit;cursor:pointer;border:0}
   <h2 style="font-size:1.2rem">What to put inside</h2>
   <ul id="rInside"></ul>
   <div id="rAngleBox"><h2 style="font-size:1.2rem">Your angle</h2><p id="rAngle"></p></div>
+  <h2 style="font-size:1.2rem">Your smallest useful test</h2>
+  <p id="pilot"></p><p id="evidence"></p>
   <h2 style="font-size:1.2rem">Your first 4 weeks</h2>
   <ol id="rWeeks"></ol>
   <h2 style="font-size:1.2rem">Message to send your first 5 people</h2>
@@ -88,7 +90,7 @@ button.btn{font:inherit;cursor:pointer;border:0}
   <button class="link" id="copyMsg">Copy message</button>
   <h2 style="font-size:1.2rem;margin-top:18px">Want it even more tailored?</h2>
   <p>Paste this prompt into ChatGPT or Claude. It already includes all your answers, so the AI can sharpen your offer even more. The more specific you were, the better it works.</p>
-  <textarea id="rPrompt" rows="7" readonly></textarea>
+  <textarea id="rPrompt" aria-label="Your personalized offer prompt" rows="7" readonly></textarea>
   <button class="btn" id="copyPrompt">Copy AI prompt</button>
   <div class="box">
     <span class="tag">Doors are open</span>
@@ -131,16 +133,25 @@ const PATHS = {
 const OUT = {start:"get started",steady:"stay consistent",time:"save time",calm:"feel less overwhelmed",first:"find their first customers"};
 
 const STEPS = [
- {q:"Which income path are you building?",t:"c",o:[["Communities and memberships","c"],["YouTube and content","y"],["Digital products","d"],["Services and freelancing","s"],["Affiliate and recommendations","a"]],k:"path"},
+ {q:"How do you want to help people?",tip:"A service means doing a task for one person. A digital product is a resource people use themselves. Choose the closest fit; you can go back.",t:"c",o:[["Communities and memberships","c"],["YouTube and content","y"],["Digital products","d"],["Services and freelancing","s"],["Affiliate: recommend products you use","a"]],k:"path"},
  {q:"Who do you want to help?",t:"x",k:"aud",ph:"e.g. stay-at-home moms",tip:"Narrow it down. Instead of \"moms,\" try \"new moms going back to work\" or \"stay-at-home moms who want a side income.\"",chips:["stay-at-home moms","new moms","beginners","small business owners","busy professionals","college students","new creators","side hustlers","parents of toddlers","career changers","retirees","freelancers"]},
  {q:"What's your skill, interest or topic?",t:"x",k:"topic",ph:"e.g. baking, budgeting, Canva, fitness",chips:["budgeting and saving","meal planning","home workouts","Canva design","social media content","AI tools for beginners","organization and planning","parenting","baking","personal finance","resume and job search","language learning"],tip:"Go one level deeper. Instead of \"fitness,\" try \"15-minute home workouts.\""},
- {q:"What result do you want them to get?",t:"x",k:"result",ph:"e.g. plan a week of meals in one hour",chips:["get started in one weekend","plan a week of meals in one hour","save 5 hours a week","make their first sale","build a simple daily routine","create content without burning out","feel confident using AI","stick to a budget"],tip:"Name a result they can picture, ideally with a number or a timeframe."},
- {q:"What makes you the right person to help? (optional)",t:"x",k:"angle",ph:"e.g. I fed my family of 4 on a tight budget",chips:["I learned it the hard way","I did it while raising kids","I have 15+ years of experience","I started as a complete beginner","I figured out a shortcut that works"],opt:true},
- {q:"What's their biggest struggle with it?",t:"c",k:"prob",o:[["Getting started","start"],["Staying consistent","steady"],["Saving time","time"],["Feeling overwhelmed","calm"],["Finding their first customers","first"]]},
+ {q:"What result do you want them to get?",t:"x",k:"result",ph:"e.g. plan a week of meals in one hour",chips:["get started in one weekend","plan a week of meals in one hour","finish a weekly plan in one sitting","send a first offer to one potential customer","build a simple daily routine","create content without burning out","feel confident using AI","stick to a budget"],tip:"Name a result they can picture, ideally with a number or a timeframe."},
+ {q:"What makes you the right person to help? (optional)",t:"x",k:"angle",ph:"e.g. I fed my family of 4 on a tight budget",chips:["I learned it the hard way","I did it while raising kids","I use this in my own routine","I started as a complete beginner","I figured out a shortcut that works"],opt:true},
+ {q:"Where do they get stuck right now?",t:"x",k:"prob",ph:"Example: choosing dinners that use what’s already in the fridge",tip:"Describe a moment when the problem shows up. Use their words if you have them.",chips:["I don’t know what to do first","I start but can’t keep it going","I spend too long choosing","I keep redoing the same task"]},
+ {q:"What evidence do you have that someone wants help?",t:"c",k:"proof",o:[["It’s an idea I haven’t checked yet","idea"],["Someone described this problem to me","heard"],["Someone tried a sample or asked for help","tried"],["Someone has paid for help with this problem","paid"]]},
  {q:"How do you want to help them get there?",t:"f",k:"fmt",tip:"Pick the way you would enjoy helping most. You can decide how and whether to charge later. Start with the help, not the price."}
 ];
 const $ = id => document.getElementById(id);
 let i = 0, st = {};
+const suggested=new URLSearchParams(location.search).get("path");
+if(Object.hasOwn(PATHS,suggested)) $("carry").textContent="Your path quiz suggested "+PATHS[suggested].n+". You can use it or pick a different path in the first question.";
+const proofAdvice={
+ idea:"Your idea is still a guess. Ask one person about the last time this happened before building a sample.",
+ heard:"You’ve heard the problem in someone’s own words. Show that person a rough sample and ask what it would replace.",
+ tried:"You already have a signal of interest. Watch a tester use the smallest version and record where they need help.",
+ paid:"Someone has paid for help with this problem. Ask what they bought, what was missing, and whether they would try your version."
+};
 
 function show(id){["intro","quiz","result"].forEach(s => $(s).hidden = s !== id); window.scrollTo(0,0);}
 const title = s => s.replace(/\b\w/g, c => c.toUpperCase());
@@ -148,9 +159,9 @@ function next(){ if (i < STEPS.length - 1) { i++; render(); } else finish(); }
 
 function render(){
   const s = STEPS[i], body = $("body");
-  $("fill").style.width = (i / STEPS.length * 100) + "%";
+  $("fill").style.width = ((i + 1) / STEPS.length * 100) + "%";
   $("count").textContent = "Question " + (i + 1) + " of " + STEPS.length;
-  $("q").textContent = s.q;
+  $("q").textContent = s.q; $("q").tabIndex=-1; $("q").focus();
   $("back").hidden = i === 0;
   body.textContent = "";
   let opts = null;
@@ -158,20 +169,27 @@ function render(){
   if (s.t === "f") opts = PATHS[st.path].f.map((f, n) => [f[0], n]);
   if (opts) {
     if (s.tip) { const tp = document.createElement("p"); tp.className = "tip"; const tb = document.createElement("b"); tb.textContent = "Tip: "; tp.appendChild(tb); tp.appendChild(document.createTextNode(s.tip)); body.appendChild(tp); }
-    opts.forEach(o => { const b = document.createElement("button"); b.className = "opt"; b.textContent = o[0];
+    opts.forEach(o => { const b = document.createElement("button"); b.className = "opt"; b.textContent = o[0]+(s.k==="path" && o[1]===suggested?" (your quiz result)":"");
       b.onclick = () => { st[s.k] = o[1]; next(); }; body.appendChild(b); });
+    if(s.t==="f"){
+      const label=document.createElement("label");label.htmlFor="customFmt";label.textContent="Or describe your own format";
+      const custom=document.createElement("input");custom.type="text";custom.id="customFmt";custom.maxLength=100;custom.placeholder="Example: a 20-minute setup call";custom.value=st.customFmt||"";
+      const go=document.createElement("button");go.className="btn";go.textContent="Use my format";go.disabled=!custom.value.trim();
+      custom.oninput=()=>go.disabled=!custom.value.trim();go.onclick=()=>{if(custom.value.trim()){st.customFmt=custom.value.trim();st.fmt="custom";next();}};
+      body.append(label,custom,go);
+    }
     return;
   }
   const inp = document.createElement("input");
-  inp.type = "text"; inp.placeholder = s.ph; inp.maxLength = 60; inp.value = st[s.k] || ""; inp.setAttribute("aria-label", s.q);
+  inp.type = "text"; inp.placeholder = s.ph; inp.maxLength = 180; inp.value = st[s.k] || ""; inp.setAttribute("aria-label", s.q);
   body.appendChild(inp);
   if (s.tip) { const tp = document.createElement("p"); tp.className = "tip"; tp.style.marginTop = "12px"; const tb = document.createElement("b"); tb.textContent = "Be specific: "; tp.appendChild(tb); tp.appendChild(document.createTextNode(s.tip)); body.appendChild(tp); }
   if (s.chips.length) { const w = document.createElement("div"); w.className = "chips";
     s.chips.forEach(c => { const b = document.createElement("button"); b.className = "chip"; b.textContent = c;
-      b.onclick = () => { inp.value = c; go.disabled = false; }; w.appendChild(b); }); body.appendChild(w); }
+      b.onclick = () => { inp.value = c; st[s.k]=c; go.disabled = false; }; w.appendChild(b); }); body.appendChild(w); }
   const go = document.createElement("button"); go.className = "btn"; go.textContent = s.opt ? "Continue (or skip)" : "Continue"; go.disabled = !s.opt && !inp.value.trim();
   const commit = () => { const v = inp.value.trim(); if (v || s.opt) { st[s.k] = v; next(); } };
-  inp.oninput = () => go.disabled = !s.opt && !inp.value.trim();
+  inp.oninput = () => {st[s.k]=inp.value;go.disabled = !s.opt && !inp.value.trim();};
   inp.onkeydown = e => { if (e.key === "Enter") commit(); };
   go.onclick = commit; body.appendChild(go);
 }
@@ -179,24 +197,26 @@ function render(){
 function li(ul, t){ const x = document.createElement("li"); x.textContent = t; ul.appendChild(x); }
 
 function finish(){
-  const p = PATHS[st.path], f = p.f[st.fmt], T = title(st.topic), a = st.aud, noun = f[2];
+  const p = PATHS[st.path], f = st.fmt==="custom"?[st.customFmt,st.customFmt,"Starter","one small example of "+st.customFmt]:p.f[st.fmt], T = title(st.topic), a = st.aud, noun = f[2];
   $("rTag").textContent = p.n + " offer";
   st.text = "I help " + a + " " + st.result + " with " + f[1] + ".";
   $("rStmt").textContent = st.text;
   const names = $("rNames"); names.textContent = "";
-  [ "The " + T + " Starter " + noun, T + " Made Simple", T + " in 7 Days" ].forEach(n => li(names, n));
+  [ "The " + T + " Starter " + noun, T + " Made Simple", "The " + T + " Field Notes" ].forEach(n => li(names, n));
   const inside = $("rInside"); inside.textContent = "";
-  p.in(st.topic, a).forEach(t => li(inside, t));
+  ["Start with "+f[3]+".", "Show one worked example for "+a+" that addresses this sticking point: “"+st.prob+"”.", "Give the tester one task: try to "+st.result+". Ask where they needed help."].forEach(t=>li(inside,t));
+  $("pilot").textContent="Test the smallest version with one person before making the full "+noun.toLowerCase()+". Bring a sample and ask them to try it while you watch.";
+  $("evidence").textContent=proofAdvice[st.proof]+" A useful signal is a specific next action: they use it again, request a change, or ask how to get the finished version.";
   $("rAngle").textContent = st.angle ? "Lead with this: " + st.angle + ". It shows why you understand their problem, so put it in your first line." : "";
   $("rAngleBox").hidden = !st.angle;
   const wk = $("rWeeks"); wk.textContent = "";
-  ["Week 1: Ask 5 people who fit '" + a + "' what's hardest about " + st.topic + ". Write down their exact words.",
+  ["Week 1: "+proofAdvice[st.proof],
    "Week 2: Build the smallest version: " + f[3] + ". Finish it, even if it's rough.",
    "Week 3: Share it with 3 to 5 people and ask what was confusing or missing.",
    "Week 4: Fix what they told you, then share it publicly."].forEach(t => li(wk, t));
-  st.msg = "Hi! I'm working on something to help " + a + " " + st.result + ", using " + f[1] + (st.angle ? " (" + st.angle + ")" : "") + ". Could I ask you 2 quick questions? What's the hardest part of " + st.topic + " for you right now, and what have you tried so far?";
+  st.msg = "Hi! I'm working on something to help " + a + " " + st.result + ", using " + f[1] + (st.angle ? " (" + st.angle + ")" : "") + ". Could I ask you 2 quick questions? When was the last time you ran into this: “" + st.prob + "”? What did you try?";
   $("rMsg").textContent = st.msg;
-  st.prompt = "Act as a friendly business coach for beginners. I want to create " + f[1] + " as my first " + p.n.toLowerCase() + " offer. Who I help: " + a + ". Topic: " + st.topic + ". The result I want them to get: " + st.result + ". Their biggest struggle is trying to " + OUT[st.prob] + ". " + (st.angle ? "My background: " + st.angle + ". " : "") + "Give me: 1) three specific offer ideas with names, 2) what to include in the smallest version, 3) a simple 4-week plan to build and test it, and 4) five questions to ask my first customers. Keep it practical and beginner-friendly, and do not promise income results.";
+  st.prompt = "Act as a friendly business coach for beginners. I want to create " + f[1] + " as my first " + p.n.toLowerCase() + " offer. Who I help: " + a + ". Topic: " + st.topic + ". The result I want them to get: " + st.result + ". The sticking point they described: " + st.prob + ". " + (st.angle ? "My background: " + st.angle + ". " : "") + "What I know about demand: "+STEPS.find(x=>x.k==="proof").o.find(o=>o[1]===st.proof)[0]+". Separate evidence from guesses and ask two clarifying questions before drafting. Give me: 1) three specific offer ideas with names, 2) what to include in the smallest version, 3) a simple 4-week plan to build and test it, and 4) five questions to ask my first customers. Keep it practical and beginner-friendly, and do not promise income results.";
   $("rPrompt").value = st.prompt;
   setupCta();
   $("copy").textContent = "Copy my statement"; $("copyMsg").textContent = "Copy message"; $("copyPrompt").textContent = "Copy AI prompt";
@@ -206,7 +226,7 @@ function finish(){
 $("start").onclick = () => { i = 0; st = {}; show("quiz"); render(); };
 $("back").onclick = () => { if (i > 0) { i--; render(); } };
 $("again").onclick = () => show("intro");
-const copyText = async (btn, get) => { try { await navigator.clipboard.writeText(get()); btn.textContent = "Copied"; } catch (e) { btn.textContent = "Select the text to copy"; } };
+const copyText = async (btn, get) => { try { await navigator.clipboard.writeText(get()); btn.textContent = "Copied"; } catch (e) { if(btn===$("copyPrompt")){ $("rPrompt").focus(); $("rPrompt").select(); } btn.textContent = "Select the text and use Copy"; } };
 $("copy").onclick = () => copyText($("copy"), () => st.text);
 $("copyMsg").onclick = () => copyText($("copyMsg"), () => st.msg);
 $("copyPrompt").onclick = () => copyText($("copyPrompt"), () => st.prompt);
