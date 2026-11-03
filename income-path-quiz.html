@@ -43,7 +43,7 @@ button.btn{font:inherit;cursor:pointer;border:0}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
 #wl label{display:block;margin-bottom:6px;font-size:.95rem}
 .btn2{display:inline-block;background:none;color:var(--accent);border:2px solid var(--accent);border-radius:10px;padding:12px 20px;font-weight:700;text-decoration:none}.btn2:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
-</style>
+textarea,#detail{width:100%;padding:12px;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:8px;font:inherit;margin:6px 0 14px}.opt[aria-pressed="true"]{border-color:var(--accent)}h2:focus{outline:none}</style>
 </head>
 <body>
 <main>
@@ -52,7 +52,7 @@ button.btn{font:inherit;cursor:pointer;border:0}
 <section id="intro">
   <h1>Not sure which online income path fits you?</h1>
   <p>Answer 6 quick questions. You'll get the path that matches your skills, your comfort level and your time, plus your first three steps.</p>
-  <p class="muted">Takes about 2 minutes.</p>
+  <p class="muted">Choose the closest answer. You can add a detail in your own words at the end.</p>
   <button class="btn" id="start">Find my path</button>
 </section>
 
@@ -60,7 +60,7 @@ button.btn{font:inherit;cursor:pointer;border:0}
   <div class="bar"><i id="fill"></i></div>
   <div class="count" id="count"></div>
   <h2 id="q"></h2>
-  <div id="opts"></div>
+  <p id="hint" class="muted"></p><div id="opts"></div>
   <button class="link" id="back">Go back</button>
 </section>
 
@@ -70,7 +70,11 @@ button.btn{font:inherit;cursor:pointer;border:0}
   <p id="rLine"></p>
   <h2 style="font-size:1.2rem">Your first three steps</h2>
   <ol id="rSteps"></ol>
-  <p class="muted" id="rAlt"></p>
+  <div class="box"><h2>Another path to compare</h2><p id="rAlt"></p><p id="compare"></p></div>
+  <div class="box"><h2>Explore your result in ChatGPT</h2><p>Copy your answers and ask for a small experiment you can try this week.</p>
+  <textarea id="prompt" aria-label="Personalized path exploration prompt" rows="6" readonly></textarea>
+  <button class="btn" id="copyPath">Copy my prompt</button></div>
+  <div class="box"><a class="btn" id="buildOffer" href="offer-builder.html">Build an offer for this path →</a></div>
   <div class="box">
     <h2 style="font-size:1.3rem">Build a plan around your quiz result</h2>
     <p>Bring your three steps to Build Smarter. We’ll help you decide who to serve, shape your first offer, and plan what to do over the next 30 days.</p>
@@ -103,53 +107,48 @@ const PATHS = {
   a:{name:"Affiliate and recommendations",line:"You enjoy researching and sharing what works. Honest recommendations of tools you really use can earn commissions.",steps:["List 5 tools or products you genuinely use.","Create honest 'how I use it' content for each one.","Always disclose your affiliate links."]}
 };
 
+// The first four answers rank paths. Format and time shape the experiment instead.
 const QS = [
-  {q:"How do you feel about being on camera?",o:[
-    ["I'm comfortable on camera",{y:2,c:1}],
-    ["Voice or screen recordings only",{y:1,d:1,c:1}],
-    ["I'd rather stay faceless",{d:2,a:1,s:1}],
-    ["I prefer writing",{s:1,a:1,d:1}]]},
-  {q:"What do you enjoy most?",o:[
-    ["Teaching and explaining things",{d:2,c:1,y:1}],
-    ["Connecting with people",{c:2,s:1}],
-    ["Creating: writing, design or video",{y:2,d:1,s:1}],
-    ["Researching and recommending",{a:2,y:1}]]},
-  {q:"How do you feel about the timeline?",o:[
-    ["I want to start earning as soon as I can",{s:2,a:1}],
-    ["A few months of building is fine",{d:2,a:1,c:1}],
-    ["I'll play the long game",{y:2,c:2}]]},
-  {q:"Which describes you best?",o:[
-    ["I have a skill people already pay for",{s:3}],
-    ["I know a lot about one topic",{d:2,c:1,y:1}],
-    ["I already have an audience or network",{c:2,a:1,y:1}],
-    ["I'm not sure yet",{a:1,y:1,d:1}]]},
-  {q:"How much time can you give each week?",o:[
-    ["About 3 to 5 hours",{a:1,d:1}],
-    ["About 5 to 10 hours",{d:1,s:1,c:1}],
-    ["10 hours or more",{y:2,s:1,c:1}]]},
-  {q:"What kind of work sounds best?",o:[
-    ["Working one-on-one with clients",{s:2}],
-    ["Building something that sells repeatedly",{d:2}],
-    ["Growing an audience",{y:2,a:1}],
-    ["Running a group or community",{c:2}]]}
+ {q:"Which small project would you most like to try?",hint:"Picture doing the work itself, before anyone pays for it.",o:[
+ ["Finish a specific task for one person",{s:4}],["Make a checklist someone can reuse",{d:4}],["Explain a topic in a post or video",{y:4}],["Guide a small group through the same goal",{c:4}],["Compare two products I’ve actually used",{a:4}],["I’d like to try a sample before choosing",{}]]},
+ {q:"What could you draw on today?",hint:"Everyday experience counts. Pick the strongest example you have.",o:[
+ ["Someone already asks me to do a task for them",{s:3}],["I have a repeatable method or template",{d:3}],["I enjoy explaining a topic beginners ask about",{y:3,d:1}],["I bring people together around a shared goal",{c:3}],["People ask which tools I use and why",{a:3}],["I’m still discovering what I’m good at",{}]]},
+ {q:"Who could give you honest feedback this week?",hint:"A first tester can be one person. You don’t need followers.",o:[
+ ["Someone with a task I could help finish",{s:2}],["Someone who could try a worksheet or guide",{d:2}],["People who read or watch my explanations",{y:2}],["A few people who would meet or check in together",{c:2}],["Someone deciding between products I know",{a:2}],["I haven’t found a tester yet",{}]]},
+ {q:"Which commitment sounds realistic?",hint:"Choose what you could keep doing after the first week.",o:[
+ ["One client project at a time",{s:3}],["Create a resource and improve it from feedback",{d:3}],["Publish helpful explanations regularly",{y:3}],["Show up for the same group each week",{c:3}],["Test products and keep comparisons current",{a:3}],["I’m unsure; I want a small experiment first",{}]]},
+ {q:"How would you most comfortably share a first sample?",hint:"Any of the five paths can work without showing your face.",o:[["Written example or photos",{}],["Voice or screen recording",{}],["On-camera demonstration",{}],["Private conversation",{}],["I’m open to any format",{}]]},
+ {q:"How much time can you protect this week?",hint:"Choose a realistic week. This sets the size of your first experiment.",o:[["Less than one hour",{}],["One to three hours",{}],["Four to six hours",{}],["Seven hours or more",{}]]}
 ];
-
-const ORDER = ["d","s","y","c","a"];
+const trials={
+ s:["Offer to finish one clearly defined task for one person.","For example, turn a shop owner’s five product photos into five caption drafts.","Ask which draft they would use and what they currently do instead."],
+ d:["Make one reusable page that solves a single problem.","For example, fill in one day of a meal planner, then give a tester a blank copy.","Watch where they get stuck using it without your help."],
+ y:["Teach one thing a beginner can do today.","For example, show how to resize one photo for a newsletter.","Ask a reader to try it and tell you which step needed more explanation."],
+ c:["Try one guided check-in before opening a membership.","For example, invite two people to plan a week of lunches together.","Ask whether they would return next week and what they would want to do together."],
+ a:["Compare two things you’ve personally tried for the same job.","For example, show which design tool you would choose for a simple flyer and why.","Ask whether it helped someone choose. If you later earn a commission, explain that clearly."]
+};
+const models={s:"A client pays you to complete an agreed task.",d:"A buyer pays for a resource they can use themselves.",y:"You publish helpful content and build an audience over time. Paid offers or sponsorships can come later.",c:"Members pay for ongoing guidance, feedback, or practice together.",a:"You can earn a commission when someone buys through a disclosed referral link."};
+const ORDER=["s","d","y","c","a"];
 const $ = id => document.getElementById(id);
-let i = 0, picks = [];
+let i = 0, picks = [], note = "";
 
 function show(id){["intro","quiz","result"].forEach(s => $(s).hidden = s !== id); window.scrollTo(0,0);}
 
 function render(){
   const q = QS[i];
-  $("fill").style.width = (i / QS.length * 100) + "%";
+  $("fill").style.width = ((i + 1) / QS.length * 100) + "%";
   $("count").textContent = "Question " + (i + 1) + " of " + QS.length;
   $("q").textContent = q.q;
   $("back").hidden = i === 0;
+  $("hint").textContent=q.hint; $("q").tabIndex=-1; $("q").focus();
   const box = $("opts"); box.textContent = "";
+  if(i===QS.length-1){
+    const label=document.createElement("label"); label.htmlFor="detail"; label.textContent="Optional: one skill, interest, or constraint to include in your AI prompt";
+    const input=document.createElement("input"); input.id="detail"; input.placeholder="Example: I plan meals for picky eaters"; input.maxLength=200; input.value=note; input.oninput=()=>note=input.value.trim(); box.append(label,input);
+  }
   q.o.forEach((o, n) => {
     const b = document.createElement("button");
-    b.className = "opt"; b.textContent = o[0];
+    b.setAttribute("aria-pressed",String(picks[i]===n)); b.className = "opt"; b.textContent = o[0];
     b.onclick = () => { picks[i] = n; if (i < QS.length - 1) { i++; render(); } else finish(); };
     box.appendChild(b);
   });
@@ -158,21 +157,32 @@ function render(){
 function finish(){
   const s = {c:0,y:0,d:0,s:0,a:0};
   picks.forEach((n, k) => { const m = QS[k].o[n][1]; for (const key in m) s[key] += m[key]; });
-  const ranked = ORDER.slice().sort((a, b) => s[b] - s[a]);
-  const top = PATHS[ranked[0]], alt = PATHS[ranked[1]];
-  $("rTitle").textContent = top.name;
-  $("rLine").textContent = top.line;
-  const ol = $("rSteps"); ol.textContent = "";
-  top.steps.forEach(t => { const li = document.createElement("li"); li.textContent = t; ol.appendChild(li); });
-  $("rAlt").textContent = "Close second: " + alt.name + ". Worth exploring once your first path is moving.";
+  const preference = QS[0].o[picks[0]][1];
+  const ranked = ORDER.slice().sort((a,b)=>s[b]-s[a] || (preference[b]||0)-(preference[a]||0));
+  const [key,second]=ranked, top=PATHS[key], alt=PATHS[second];
+  const reasons=QS.slice(0,4).map((q,k)=>q.o[picks[k]]).filter(o=>o[1][key]).map(o=>o[0]);
+  const format=QS[4].o[picks[4]][0], time=QS[5].o[picks[5]][0];
+  const size=["Spend 15 minutes sketching a sample. Save the feedback step for your next session.","Set aside one hour for a rough sample and one feedback conversation.","Make one sample, then try it with two people before adding more.","Make one sample, get feedback, and use a second session to revise it."][picks[5]];
+  const tied=s[key]===s[second], noSignal=s[key]===0;
+  $("rTitle").textContent=noSignal?"Try two small experiments":top.name;
+  $("rLine").textContent=noSignal?"Your answers are still open. Try a service and a digital product to learn which work you enjoy.":models[key]+" Your answers pointed here: "+reasons.slice(0,2).join(" · ")+".";
+  const ol=$("rSteps"); ol.textContent="";
+  [trials[key][0]+" "+trials[key][1],size+" Your chosen format: "+format+".",(picks[2]===5?"Start by finding one person who has this problem. ":"")+trials[key][2]].forEach(t=>{const li=document.createElement("li");li.textContent=t;ol.appendChild(li);});
+  $("rAlt").textContent=alt.name+". "+models[second];
+  $("compare").textContent=(noSignal?"Compare how each activity feels. ":tied?"Both paths scored equally. Compare the work before choosing. ":"Try this alternative if its day-to-day work appeals more. ")+trials[second][0]+" "+trials[second][2];
+  const answers=QS.map((q,k)=>q.q+" "+q.o[picks[k]][0]).join("\n");
+  $("prompt").value="Help me compare "+top.name+" and "+alt.name+" as a beginner. My answers:\n"+answers+(note?"\nMy own detail: "+note:"")+"\nAsk me two questions about what is still uncertain. Suggest one small test for each path within my time budget, who could give feedback, and what evidence would help me choose. Explain unfamiliar terms and avoid income predictions.";
+  $("copyPath").textContent="Copy my prompt";
+  $("buildOffer").href="offer-builder.html?path="+key;
   setupCta();
   show("result");
 }
 
-$("start").onclick = () => { i = 0; picks = []; show("quiz"); render(); };
+$("start").onclick = () => { i = 0; picks = []; note=""; show("quiz"); render(); };
 $("back").onclick = () => { if (i > 0) { i--; render(); } };
 $("retake").onclick = () => show("intro");
 
+$("copyPath").onclick=async()=>{try{await navigator.clipboard.writeText($("prompt").value);$("copyPath").textContent="Copied";}catch{$("prompt").focus();$("prompt").select();$("copyPath").textContent="Prompt selected — use Copy";}};
 function setupCta(){
   document.getElementById("nlBtn").href = NEWSLETTER_URL;
 }
