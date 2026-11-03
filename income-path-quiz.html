@@ -55,6 +55,9 @@ textarea,#detail{width:100%;padding:12px;color:var(--ink);background:var(--surfa
 .field-label{display:block;margin:12px 0 6px;font-weight:650}
 select.examples{width:100%;min-height:48px;border:1px solid var(--muted);border-radius:10px;padding:10px;background:var(--bg);color:var(--ink);font:inherit}
 a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.today-item{display:flex;align-items:flex-start;gap:10px;padding:10px 0}.today-item input{width:20px;height:20px;flex:none;margin-top:3px;accent-color:var(--accent)}
+.worked-example{margin:18px 0;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:16px}
+.worked-example figcaption{color:var(--accent);font-size:.9rem;margin-bottom:12px}.example-row{padding:10px 0;border-top:1px solid var(--line)}.example-row strong{display:block;color:var(--accent)}#save-status{font-size:.9rem;margin-top:8px}
 </style>
 </head>
 <body>
@@ -83,6 +86,14 @@ a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{ou
   <p id="rLine"></p>
   <div class="takeaway"><h2>Your smallest useful test</h2>
   <ol id="rSteps"></ol></div>
+  <section class="takeaway" aria-labelledby="today-title">
+    <h2 id="today-title">Start today</h2>
+    <p>Use these as small practice steps. Check off each one as you go.</p>
+    <div id="today-list"></div>
+    <figure class="worked-example"><figcaption>A completed example — adapt it to your topic</figcaption><div id="example-card"></div></figure>
+    <button class="btn" id="save-plan" type="button">Save my starter plan</button>
+    <p id="save-status" role="status"></p>
+  </section>
   <div class="box"><h2>Another path to compare</h2><p id="rAlt"></p><p id="compare"></p></div>
   <div class="box"><h2>Explore your result in ChatGPT</h2><p>Copy your answers and ask for a small experiment you can try this week.</p>
   <textarea id="prompt" aria-label="Personalized path exploration prompt" rows="6" readonly></textarea>
@@ -201,6 +212,7 @@ function finish(){
   $("prompt").value="Help me compare "+top.name+" and "+alt.name+" as a beginner. My answers:\n"+answers+(note?"\nMy own detail: "+note:"")+"\nAsk me two questions about what is still uncertain. Suggest one small test for each path within my time budget, who could give feedback, and what evidence would help me choose. Explain unfamiliar terms and avoid income predictions.";
   $("copyPath").textContent="Copy my prompt";
   $("buildOffer").href="offer-builder.html?release=field-test&path="+key;
+  setupPractice(key);
   setupCta();
   show("result");
 }
@@ -210,6 +222,34 @@ $("back").onclick = () => { if (i > 0) { i--; render(); } };
 $("retake").onclick = () => show("intro");
 
 $("copyPath").onclick=async()=>{try{await navigator.clipboard.writeText($("prompt").value);$("copyPath").textContent="Copied";}catch{$("prompt").focus();$("prompt").select();$("copyPath").textContent="Prompt selected — use Copy";}};
+
+const practiceExamples={
+ d:[["Post topic","Show a best-selling handmade mug"],["Photo needed","The mug beside a coffee pot"],["Caption idea","Your first coffee deserves a favorite mug. Which color would you choose?"]],
+ s:[["Small task","Write one caption for a local bakery"],["Sample delivery","Fresh cinnamon rolls come out at 8. Save one for your morning break."],["Feedback question","Would you post this? What would you change?"]],
+ y:[["One-minute topic","Resize a photo for an Instagram post"],["Three beats","Open the photo → choose a square crop → save a copy"],["Try-it question","Could you follow those steps on your phone?"]],
+ c:[["Practice session","A 15-minute weekly posting check-in"],["One activity","Each person chooses one photo and drafts a caption"],["Closing question","What would you want to practice together next time?"]],
+ a:[["Comparison","Phone notes vs. a spreadsheet for planning posts"],["Phone notes","Quick for capturing ideas on the go"],["Spreadsheet","Better for sorting a week of topics and dates"],["Ask the reader","Which fits your current routine?"]]
+};
+let practicePath="d";
+function setupPractice(key){
+ practicePath=key;
+ const list=$("today-list");list.textContent="";
+ const steps=["Spend 15 minutes making one rough sample. Use the example below as a model.","Spend 5 minutes choosing one person who could give useful feedback.","Spend 5 minutes drafting a short invitation. Ask permission before sending your sample."];
+ steps.forEach((text,i)=>{const label=document.createElement("label");label.className="today-item";const check=document.createElement("input");check.type="checkbox";check.id="task-"+i;const span=document.createElement("span");span.textContent=text;label.append(check,span);list.appendChild(label);});
+ const example=$("example-card");example.textContent="";
+ for(const [label,text] of practiceExamples[key]){const row=document.createElement("div");row.className="example-row";const title=document.createElement("strong");title.textContent=label;const body=document.createElement("span");body.textContent=text;row.append(title,body);example.appendChild(row);}
+ $("save-status").textContent="";
+}
+function saveStarter(){
+ const checklist=Array.from($("today-list").children,label=>(label.children[0].checked?"[x] ":"[ ] ")+label.children[1].textContent).join("\n");
+ const example=practiceExamples[practicePath].map(row=>row.join(": ")).join("\n");
+ const details=$("rTitle").textContent+"\n"+$("rLine").textContent+"\n\nFIRST STEPS\n"+Array.from($("rSteps").children,x=>x.textContent).join("\n")+"\n\nALTERNATIVE\n"+$("rAlt").textContent+"\n"+$("compare").textContent+"\n\nAI PROMPT\n"+$("prompt").value;
+ const text="BUILD SMARTER WITH MICAYA\nMY STARTER PLAN\n\n"+details+"\n\nSTART TODAY\n"+checklist+"\n\nCOMPLETED EXAMPLE\n"+example+"\n\n"+location.href;
+ const blob=new Blob([text],{type:"text/plain;charset=utf-8"}),url=URL.createObjectURL(blob),link=document.createElement("a");link.href=url;link.download="build-smarter-starter-plan.txt";document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+ $("save-status").textContent="Your plan is ready as a text file. On a phone, use Share or Save to Files to keep it.";
+}
+$("save-plan").onclick=saveStarter;
+
 function setupCta(){
   document.getElementById("nlBtn").href = NEWSLETTER_URL;
 }
