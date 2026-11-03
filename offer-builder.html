@@ -65,6 +65,9 @@ a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{ou
 .name-studio{background:var(--surface);padding:clamp(16px,4vw,24px);border:1px solid var(--line);border-radius:16px;margin:24px 0}
 .name-studio label{display:block;font-weight:650;margin:12px 0 5px}.name-studio input{width:100%}.name-studio .btn{margin:8px 0 18px}.name-studio .opt{background:var(--bg);margin:6px 0}
 .name-studio .opt[aria-pressed="true"]{border-color:var(--accent);color:var(--accent)}#name-status{margin:12px 0 0;color:var(--muted)}
+.today-item{display:flex;align-items:flex-start;gap:10px;padding:10px 0}.today-item input{width:20px;height:20px;flex:none;margin-top:3px;accent-color:var(--accent)}
+.worked-example{margin:18px 0;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:16px}
+.worked-example figcaption{color:var(--accent);font-size:.9rem;margin-bottom:12px}.example-row{padding:10px 0;border-top:1px solid var(--line)}.example-row strong{display:block;color:var(--accent)}#save-status{font-size:.9rem;margin-top:8px}
 </style>
 </head>
 <body>
@@ -94,6 +97,14 @@ a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{ou
   <button class="link" id="copy">Copy my statement</button>
   <div class="takeaway"><h2>Your smallest useful test</h2>
   <p id="pilot"></p><p id="evidence"></p></div>
+  <section class="takeaway" aria-labelledby="today-title">
+    <h2 id="today-title">Start today</h2>
+    <p>Use these as small practice steps. Check off each one as you go.</p>
+    <div id="today-list"></div>
+    <figure class="worked-example"><figcaption>A completed example — adapt it to your topic</figcaption><div id="example-card"></div></figure>
+    <button class="btn" id="save-plan" type="button">Save my starter plan</button>
+    <p id="save-status" role="status"></p>
+  </section>
   <section class="name-studio" aria-labelledby="name-heading">
     <h2 id="name-heading">Name your offer</h2>
     <p>Try five names inspired by your offer. Pick a favorite, or change a detail and try again.</p>
@@ -322,6 +333,7 @@ function finish(){
   st.prompt = "Act as a friendly business coach for beginners. I want to create " + f[1] + " as my first " + p.n.toLowerCase() + " offer. Who I help: " + a + ". Topic: " + st.topic + ". The result I want them to get: " + st.result + ". The sticking point they described: " + st.prob + ". " + "What I know about demand: "+STEPS.find(x=>x.k==="proof").o.find(o=>o[1]===st.proof)[0]+". Separate evidence from guesses and ask two clarifying questions before drafting. Give me: 1) three ways to refine this offer, 2) what to include in the smallest version, 3) a simple 4-week plan to build and test it, and 4) five questions to ask my first customers. Keep it practical and beginner-friendly, and do not promise income results.";
   $("rPrompt").value = st.prompt;
   startNames();
+  setupPractice(st.path);
   setupCta();
   $("copy").textContent = "Copy my statement"; $("copyMsg").textContent = "Copy message"; $("copyPrompt").textContent = "Copy AI prompt";
   show("result");
@@ -392,6 +404,34 @@ function startNames(){
   $("name-topic").value=st.topic;$("name-owner").value="";$("name-words").value="";
   $("name-more").onclick=generateNames;$("name-clear").onclick=()=>{chosenName="";syncChoice();};generateNames();
 }
+
+
+const practiceExamples={
+ d:[["Post topic","Show a best-selling handmade mug"],["Photo needed","The mug beside a coffee pot"],["Caption idea","Your first coffee deserves a favorite mug. Which color would you choose?"]],
+ s:[["Small task","Write one caption for a local bakery"],["Sample delivery","Fresh cinnamon rolls come out at 8. Save one for your morning break."],["Feedback question","Would you post this? What would you change?"]],
+ y:[["One-minute topic","Resize a photo for an Instagram post"],["Three beats","Open the photo → choose a square crop → save a copy"],["Try-it question","Could you follow those steps on your phone?"]],
+ c:[["Practice session","A 15-minute weekly posting check-in"],["One activity","Each person chooses one photo and drafts a caption"],["Closing question","What would you want to practice together next time?"]],
+ a:[["Comparison","Phone notes vs. a spreadsheet for planning posts"],["Phone notes","Quick for capturing ideas on the go"],["Spreadsheet","Better for sorting a week of topics and dates"],["Ask the reader","Which fits your current routine?"]]
+};
+let practicePath="d";
+function setupPractice(key){
+ practicePath=key;
+ const list=$("today-list");list.textContent="";
+ const steps=["Spend 15 minutes making one rough sample. Use the example below as a model.","Spend 5 minutes choosing one person who could give useful feedback.","Spend 5 minutes drafting a short invitation. Ask permission before sending your sample."];
+ steps.forEach((text,i)=>{const label=document.createElement("label");label.className="today-item";const check=document.createElement("input");check.type="checkbox";check.id="task-"+i;const span=document.createElement("span");span.textContent=text;label.append(check,span);list.appendChild(label);});
+ const example=$("example-card");example.textContent="";
+ for(const [label,text] of practiceExamples[key]){const row=document.createElement("div");row.className="example-row";const title=document.createElement("strong");title.textContent=label;const body=document.createElement("span");body.textContent=text;row.append(title,body);example.appendChild(row);}
+ $("save-status").textContent="";
+}
+function saveStarter(){
+ const checklist=Array.from($("today-list").children,label=>(label.children[0].checked?"[x] ":"[ ] ")+label.children[1].textContent).join("\n");
+ const example=practiceExamples[practicePath].map(row=>row.join(": ")).join("\n");
+ const details=st.text+"\nChosen name: "+(chosenName||"Still exploring")+"\n\nFIRST TEST\n"+$("pilot").textContent+"\n"+$("evidence").textContent+"\n\nFOUR-WEEK PLAN\n"+Array.from($("rWeeks").children,x=>x.textContent).join("\n")+"\n\nOUTREACH MESSAGE\n"+st.msg+"\n\nAI PROMPT\n"+$("rPrompt").value;
+ const text="BUILD SMARTER WITH MICAYA\nMY STARTER PLAN\n\n"+details+"\n\nSTART TODAY\n"+checklist+"\n\nCOMPLETED EXAMPLE\n"+example+"\n\n"+location.href;
+ const blob=new Blob([text],{type:"text/plain;charset=utf-8"}),url=URL.createObjectURL(blob),link=document.createElement("a");link.href=url;link.download="build-smarter-starter-plan.txt";document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+ $("save-status").textContent="Your plan is ready as a text file. On a phone, use Share or Save to Files to keep it.";
+}
+$("save-plan").onclick=saveStarter;
 
 function setupCta(){
   document.getElementById("nlBtn").href = NEWSLETTER_URL;
