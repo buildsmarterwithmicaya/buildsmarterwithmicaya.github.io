@@ -307,7 +307,7 @@ $('copy').addEventListener('click',async()=>{
 <script type="text/javascript" async src="https://subscribe-forms.beehiiv.com/attribution.js"></script>
 <script>
 // If the beehiiv form can't load (e.g. in a preview viewer), show a backup signup button.
-setTimeout(()=>{document.querySelectorAll('.bh-form').forEach(d=>{if(!d.querySelector('iframe,form')){d.style.minHeight='0';d.insertAdjacentHTML('beforeend','<a class="btn" href="https://buildsmarter-newsletter.beehiiv.com/subscribe?utm_source=home_fallback">Sign up here →</a><div class="fine">(Preview only: the real email box shows on your live site.)</div>')}})},3500);
+setTimeout(()=>{document.querySelectorAll('.bh-form').forEach(d=>{if(!d.querySelector('iframe,form')&&!d.querySelector('script[data-bhv-suppressed]')&&!d.innerText.includes('already on the list')){d.style.minHeight='0';d.insertAdjacentHTML('beforeend','<a class="btn" href="https://buildsmarter-newsletter.beehiiv.com/subscribe?utm_source=home_fallback">Sign up here →</a><div class="fine">(Preview only: the real email box shows on your live site.)</div>')}})},3500);
 </script>
 <script>
 // Free prompt form: after signup, open the free prompt page. Studio form: stay.
@@ -316,6 +316,11 @@ window.addEventListener('message',function(e){if(e.origin!=='https://subscribe-f
 if(d.type!=='beehiiv:submitted'&&d.type!=='beehiiv:success-toast')return;
 var fr=[...document.querySelectorAll('iframe')].find(f=>f.contentWindow===e.source);
 if(fr&&fr.src.indexOf(FREE)>-1){gone=true;setTimeout(function(){window.location.href='free-prompt.html';},600);}});})();
+</script>
+<script>
+document.addEventListener('beehiiv:form-suppressed',function(e){var s=e.target;var box=s.closest('.bh-form');if(!box)return;box.style.minHeight='0';
+var free=(s.getAttribute('data-beehiiv-form')||'').indexOf('06efd89d')===0;
+box.insertAdjacentHTML('beforeend', free ? '<p class="muted" style="text-align:center;margin-bottom:4px">You\'re already on the list. Welcome back!</p><a class="btn" href="free-prompt.html">Get my free prompt →</a>' : '<p class="muted" style="text-align:center">You\'re already on the list. I\'ll email you the moment doors open.</p>');},true);
 </script>
 </body>
 </html>
