@@ -152,13 +152,36 @@ footer a{color:var(--rg2)}
       <div class="row2">
         <div><label>Light</label>
           <select id="light">
-            <option value="soft golden window light from the left">Window light</option>
-            <option value="golden-hour sunlight">Golden hour</option>
-            <option value="early morning blue-hour light">Blue hour</option>
-            <option value="soft overcast daylight">Overcast day</option>
+            <optgroup label="Natural light">
+            <option value="soft natural window light from the left">Window light (left)</option>
+            <option value="soft natural window light from the right">Window light (right)</option>
+            <option value="warm golden-hour sunlight, low in the sky">Golden hour</option>
+            <option value="soft pink and gold sunrise light">Sunrise</option>
+            <option value="cool early-evening blue-hour light">Blue hour</option>
+            <option value="soft, even overcast daylight">Overcast day</option>
+            <option value="bright midday sunshine with crisp natural shadows">Bright sunny day</option>
+            <option value="soft open shade on a sunny day, even light on her face">Open shade</option>
+            <option value="dappled sunlight filtering through leaves">Dappled sunlight</option>
+            <option value="sun behind her, warm glow on her hair, face softly lit">Backlit sun</option>
+            <option value="bright, airy seaside light">Beach light</option>
+            </optgroup>
+            <optgroup label="Indoor and night">
             <option value="warm lamp light at night">Lamp at night</option>
             <option value="warm candlelight and wall sconces">Candlelight</option>
-            <option value="rim light on her hair and shoulders">Rim light</option>
+            <option value="cozy fireplace glow">Fireplace glow</option>
+            <option value="warm ambient restaurant lighting">Warm ambient</option>
+            <option value="city lights at night, her face softly lit">City lights at night</option>
+            <option value="soft neon glow in pink and blue">Neon glow</option>
+            <option value="soft glow from a laptop screen on her face">Screen glow</option>
+            </optgroup>
+            <optgroup label="Studio light">
+            <option value="soft, flattering studio light from a large softbox">Soft studio light</option>
+            <option value="bright, clean high-key studio light">Bright and clean</option>
+            <option value="moody low-key light with soft shadows on one side of her face">Moody dramatic</option>
+            <option value="rim light outlining her hair and shoulders">Rim light</option>
+            <option value="subtle on-camera flash, editorial look">Subtle flash</option>
+            <option value="even ring light, soft catchlights in her eyes">Ring light</option>
+            </optgroup>
           </select></div>
         <div><label>Mood</label>
           <select id="mood">
@@ -168,28 +191,61 @@ footer a{color:var(--rg2)}
             <option value="warm, cozy mood">Cozy</option>
             <option value="confident, polished mood">Confident</option>
             <option value="joyful, light mood">Joyful</option>
+            <option value="luxurious, high-end mood">Luxurious</option>
+            <option value="empowered, in-charge mood">Boss energy</option>
+            <option value="professional, trustworthy mood">Professional</option>
+            <option value="soft, romantic mood">Romantic</option>
+            <option value="dreamy, airy mood">Dreamy</option>
+            <option value="peaceful, serene mood">Peaceful</option>
+            <option value="playful, fun mood">Playful</option>
+            <option value="bright, energetic mood">Energetic</option>
+            <option value="moody, mysterious mood">Moody</option>
+            <option value="warm, nostalgic mood">Nostalgic</option>
+            <option value="adventurous, free-spirited mood">Adventurous</option>
+            <option value="celebratory, festive mood">Celebratory</option>
           </select></div>
       </div>
 
       <div class="step"><span class="lt">R</span>Realism &amp; style</div>
       <select id="look">
-        <option value="Candid lifestyle photo, shot on a modern iPhone, natural HDR, photorealistic, natural skin texture with visible pores and small imperfections, true-to-life color">Candid phone photo</option>
-        <option value="Cinematic editorial portrait, warm moody light, subtle film grain, photorealistic, natural skin texture with visible pores, rich but natural color">Cinematic editorial</option>
-      </select>
+            <option value="Candid lifestyle photo, shot on a modern iPhone, natural HDR, photorealistic, natural skin texture with visible pores and small imperfections, true-to-life color">Candid phone photo</option>
+            <option value="Cinematic editorial portrait, warm moody light, subtle film grain, photorealistic, natural skin texture with visible pores, rich but natural color">Cinematic editorial</option>
+            <option value="Professional brand photoshoot, photographed by a portrait photographer on a full-frame camera, not a selfie, photorealistic, natural skin texture with visible pores, clean true-to-life color">Brand photoshoot</option>
+            <option value="High-end luxury fashion magazine editorial, polished styling, photorealistic, natural skin texture with visible pores, refined rich color">Luxury magazine</option>
+            <option value="Bright, airy lifestyle photo, soft pastel tones, clean whites, photorealistic, natural skin texture with visible pores">Bright and airy</option>
+            <option value="Editorial street-style photo, natural city light, photorealistic, natural skin texture with visible pores, true-to-life color">Street style</option>
+            <option value="Shot on 35mm film, Kodak Portra 400 look, soft natural grain, gentle warm tones, photorealistic, natural skin texture">35mm film</option>
+            <option value="Direct-flash editorial photo, crisp highlights, slightly dark background, photorealistic, natural skin texture with visible pores">Flash editorial</option>
+            <option value="Classic black-and-white portrait, rich contrast, fine grain, photorealistic, natural skin texture with visible pores">Black and white</option>
+            <option value="Early-2000s digital point-and-shoot camera photo, slight flash, casual and nostalgic, photorealistic, natural skin texture">Digital camera</option>
+            <option value="Handheld creator-style photo, casual and authentic, modern phone camera, photorealistic, natural skin texture with visible pores">Creator vlog</option>
+          </select>
 
       <div class="step"><span class="lt">T</span>Technical</div>
       <div class="row2">
         <div><label>Shot</label>
           <select id="shot">
-            <option value="medium shot from the waist up, 35mm lens">Waist up</option>
+            <option value="extreme close-up of her face, 100mm lens">Extreme close-up</option>
             <option value="close-up from the shoulders up, 85mm lens">Close-up</option>
-            <option value="full body, 35mm lens">Full body</option>
             <option value="framed from mid-chest up with space above her head, front-facing, 50mm lens">Talking head</option>
+            <option value="medium shot from the waist up, 35mm lens" selected>Waist up</option>
+            <option value="three-quarter shot from the knees up, 35mm lens">Knees up</option>
+            <option value="full body, head to toe in frame, 35mm lens">Full body</option>
+            <option value="wide shot, her full body small in the scene, 24mm lens">Wide scene</option>
           </select></div>
         <div><label>Angle</label>
           <select id="angle">
             <option value="Eye level">Eye level</option>
             <option value="Slightly above eye level">Slightly above</option>
+            <option value="High angle looking down at her">High angle</option>
+            <option value="Low angle looking up at her, confident and powerful">Low angle</option>
+            <option value="Slightly below eye level">Slightly below</option>
+            <option value="Three-quarter view, her face turned slightly from the camera">Three-quarter view</option>
+            <option value="Side profile">Side profile</option>
+            <option value="Over-the-shoulder view from behind her">Over the shoulder</option>
+            <option value="From behind as she looks back over her shoulder">From behind</option>
+            <option value="Overhead view looking straight down">Overhead</option>
+            <option value="Framed through a doorway, natural foreground framing">Through a doorway</option>
           </select></div>
       </div>
       <div class="row2">
@@ -218,11 +274,14 @@ footer a{color:var(--rg2)}
       <label>What you want to prevent</label>
       <textarea id="excl" placeholder="Write it as what a clean photo looks like, e.g. She is the only person in the frame. Realistic hands with five natural fingers. Clean surfaces with no text or logos."></textarea>
       <div class="hint">Describe what you want instead of listing "no's." AI follows "she is the only person in the frame" better than "no extra people." Leave it blank to skip.</div>
-      <div class="hint" style="margin-top:10px">Quick add-ons (optional):</div>
-      <label class="chk"><input type="checkbox" id="xScreen"> There's a screen in the shot</label>
-      <label class="chk"><input type="checkbox" id="xText"> I'll add text on top later</label>
-      <label class="chk"><input type="checkbox" id="xAlone"> Strangers keep showing up</label>
-      <label class="chk"><input type="checkbox" id="xLogo"> Cups or bags get fake logos</label>
+      <div class="hint" style="margin-top:10px">Common fixes: tick any before you build, or after. If a result came out wrong, tick the fix and your prompt updates right away.</div>
+      <label class="chk"><input type="checkbox" id="xHands"> Hands look weird</label>
+      <label class="chk"><input type="checkbox" id="xAlone"> Extra people show up</label>
+      <label class="chk"><input type="checkbox" id="xFace"> Face doesn't look like me</label>
+      <label class="chk"><input type="checkbox" id="xSkin"> Skin looks plastic or airbrushed</label>
+      <label class="chk"><input type="checkbox" id="xText"> Random text or logos appear</label>
+      <label class="chk"><input type="checkbox" id="xObj"> Objects look melted or floating</label>
+      <label class="chk"><input type="checkbox" id="xJewel"> Too much jewelry</label>
 
       <button class="btn dark" id="make">Build my prompt</button>
       <div class="out" id="out" style="display:none"></div>
@@ -264,15 +323,15 @@ footer a{color:var(--rg2)}
   <div class="sec">
     <div class="kicker">Weekly</div>
     <h2>Build Smarter Weekly</h2>
-    <p class="muted">A free weekly email with five AI and creator updates you can use. When you subscribe, you'll also get my free AI twin prompt as a welcome gift, plus first notice when the Studio opens.</p>
-    <a class="btn ghost" href="https://buildsmarter-newsletter.beehiiv.com/?utm_source=home_weekly">Subscribe free + get the prompt →</a>
+    <p class="muted">A free weekly email with five AI and creator updates you can use. When you subscribe, you'll also get my free Brand Photoshoot Kit as a welcome gift, plus first notice when the Studio opens.</p>
+    <a class="btn ghost" href="https://buildsmarter-newsletter.beehiiv.com/?utm_source=home_weekly">Subscribe free + get the kit →</a>
   </div>
 </div>
 <footer>Every image and video on this page is my AI twin, made with AI.<br>@buildsmarterwithmicaya · Instagram · TikTok · Facebook · YouTube<br>© 2026 Build Smarter with Micaya</footer>
 <script>
 const $=id=>document.getElementById(id);
 $('action').addEventListener('change',()=>{$('actionCustom').style.display=$('action').value==='custom'?'block':'none'});
-$('vid').addEventListener('change',()=>{if($('vid').value==='lip'){$('shot').value=$('shot').options[3].value;$('action').selectedIndex=4;$('actionCustom').style.display='none';}});
+$('vid').addEventListener('change',()=>{if($('vid').value==='lip'){$('shot').value='framed from mid-chest up with space above her head, front-facing, 50mm lens';$('angle').value='Eye level';$('action').selectedIndex=4;$('actionCustom').style.display='none';}});
 const clean=(s,fb)=>{s=(s||'').trim().replace(/[.\s]+$/,'');return s||fb};
 $('make').addEventListener('click',()=>{
   const v=$('vid').value;
@@ -287,10 +346,13 @@ $('make').addEventListener('click',()=>{
   let ex=clean($('excl').value,'');
   if(ex) ex+='.';
   const add=s=>{ex=(ex?ex+' ':'')+s};
-  if($('xScreen').checked) add('Screen glows softly, contents not visible. Laptop lid plain with no logo.');
-  if($('xText').checked) add('Clean surfaces with no lettering anywhere in the image.');
-  if($('xAlone').checked) add('She is alone. The space is quiet and empty behind her.');
-  if($('xLogo').checked) add('Cups and bags plain and unbranded, smooth and blank.');
+  if($('xHands').checked) add('Realistic hands with five natural fingers, each hand with one clear job.');
+  if($('xAlone').checked) add('She is the only person in the frame.');
+  if($('xFace').checked) add('Her face matches the reference exactly.');
+  if($('xSkin').checked) add('Natural skin texture with visible pores, no airbrushed or waxy look.');
+  if($('xText').checked) add('Clean surfaces with no text, logos or watermarks anywhere.');
+  if($('xObj').checked) add('Every object whole, solid and physically real, resting naturally where it belongs.');
+  if($('xJewel').checked) add('Only her signature jewelry, simple and elegant.');
   const t=`SUBJECT: ${lock}, wearing ${outfit}.
 MOTION: ${action}.
 ATMOSPHERE: ${place}${details?', '+details:''}, ${$('light').value}, ${$('mood').value}.
@@ -299,6 +361,8 @@ TECHNICAL: ${$('angle').value}, ${$('shot').value}, focus on her eyes, ${bg}${th
 `+(ex?`\nEXCLUSIONS: ${ex}`:'');
   $('out').textContent=t.trim(); $('out').style.display='block'; $('copy').style.display='block'; $('refine').style.display='flex'; $('copy').textContent='Copy prompt';
 });
+document.querySelector('.b').addEventListener('input',e=>{if($('out').style.display==='block'&&e.target.tagName!=='SELECT'&&e.target.type!=='checkbox')$('make').click();});
+document.querySelector('.b').addEventListener('change',e=>{if($('out').style.display==='block'&&e.target.id!=='actionCustom')$('make').click();});
 $('copy').addEventListener('click',async()=>{
   try{await navigator.clipboard.writeText($('out').textContent);$('copy').textContent='Copied ✓'}
   catch(e){const r=document.createRange();r.selectNodeContents($('out'));const s=getSelection();s.removeAllRanges();s.addRange(r);$('copy').textContent='Selected: press copy'}
