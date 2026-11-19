@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow"><title>Neon Nights: Free AI Twin Prompts · Build Smarter with Micaya</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@1,500;1,600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0B1A33;--navy2:#13284A;--navy3:#1A3460;--rg:#C9907A;--rg2:#E2B8A6;--ivory:#FAF6F1;--line:#E8DDD3;--ink:#1B2333;--mute:#6B7280}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Montserrat,sans-serif;background:var(--navy);color:#F6EEE7;line-height:1.55;font-size:15px}
+.preview{background:#FFF3D6;color:#7A5300;text-align:center;font-size:12px;font-weight:700;letter-spacing:.5px;padding:8px 12px}
+.wrap{max-width:520px;margin:0 auto;padding:0 18px}
+.top{display:flex;align-items:center;gap:10px;padding:22px 0 8px}
+.top .mark{font-weight:800;font-size:13px;letter-spacing:2.5px;text-transform:uppercase;line-height:1.25}
+.top .mark span{display:block;color:var(--rg2);font-weight:600;letter-spacing:3px;font-size:11px}
+.hero{position:relative;border-radius:18px;overflow:hidden;margin-top:12px;aspect-ratio:9/13;background:#000}
+.hero video{width:100%;height:100%;object-fit:cover;display:block}
+.hero .over{position:absolute;left:0;right:0;bottom:0;padding:22px 20px;background:rgba(11,26,51,.78)}
+.serif{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500}
+h1{font-weight:900;font-size:30px;line-height:1.06;color:#fff}
+h1 em{font-style:normal;color:var(--rg)}
+.hero p{color:#D9D2CC;font-size:14px;margin-top:8px}
+.sig{color:var(--rg2);font-size:17px;margin-top:6px}
+.btn{display:block;text-align:center;background:var(--rg);color:#fff;text-decoration:none;font-weight:800;font-size:14px;letter-spacing:.5px;padding:15px 18px;border-radius:40px;margin-top:14px;border:0;cursor:pointer;width:100%;font-family:Montserrat}
+.btn.ghost{background:transparent;border:1.5px solid var(--rg2);color:var(--rg2)}
+.btn.dark{background:var(--navy)}
+.sec{margin-top:34px}
+.kicker{font-size:11px;letter-spacing:3px;font-weight:700;color:var(--rg2);text-transform:uppercase}
+h2{font-weight:900;font-size:22px;color:#fff;margin:6px 0 8px;line-height:1.15}
+.muted{color:#C9C1BA;font-size:14px}
+.card{background:var(--navy2);border:1px solid #23406B;border-radius:16px;padding:18px;margin-top:14px}
+.light{background:var(--ivory);color:var(--ink);border:0}
+.light h3{color:var(--navy)}
+h3{font-weight:800;font-size:17px;color:#fff}
+.prod{display:grid;grid-template-columns:120px 1fr;gap:14px;align-items:center}
+.prod img,.prod video{width:120px;border-radius:10px;display:block}
+.prod video{height:160px;object-fit:cover}
+.price{font-weight:900;color:var(--rg);font-size:18px;margin-top:4px}
+.tag{display:inline-block;background:var(--rg);color:#fff;font-size:10px;font-weight:800;letter-spacing:2px;padding:4px 9px;border-radius:20px;margin-bottom:6px}
+.tag.soon{background:#2A4570}
+.small{font-size:13px;color:#C9C1BA;margin-top:4px}
+.light .small{color:var(--mute)}
+/* builder */
+.b label{display:block;font-size:11px;font-weight:800;letter-spacing:1.5px;color:var(--rg);margin:12px 0 5px;text-transform:uppercase}
+.b select,.b input,.b textarea{width:100%;font-family:Montserrat;font-size:14px;padding:11px 12px;border-radius:10px;border:1px solid var(--line);background:#fff;color:var(--ink)}
+.b textarea{min-height:76px;resize:vertical}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.out{background:var(--navy);color:#F6EEE7;border-radius:12px;padding:14px;margin-top:14px;font-size:13.5px;white-space:pre-wrap;line-height:1.6}
+.out b{color:var(--rg2);font-size:11px;letter-spacing:1.4px}
+.hint{font-size:12px;color:var(--mute);margin-top:6px}
+.tools{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.tool{background:var(--navy2);border:1px solid #23406B;border-radius:12px;padding:12px;font-size:13px}
+.tool b{display:block;color:#fff;font-size:14px}
+.tool span{color:#9FA9BD;font-size:12px}
+.studio{position:relative;border-radius:16px;overflow:hidden;margin-top:14px;display:grid;grid-template-columns:1fr 1fr;background:var(--navy2);border:1px solid #23406B}
+.studio img{width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block}
+.studio .t{padding:18px 16px}
+.step{display:flex;align-items:center;gap:9px;margin:22px 0 2px;font-weight:900;font-size:14px;color:var(--navy);padding-top:14px;border-top:1px solid var(--line)}
+.step:first-child{margin-top:0;padding-top:0;border-top:0}
+.lt{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--navy);color:var(--rg2);font-weight:900;font-size:13px;flex:none}
+.b label.chk{display:flex;align-items:center;gap:9px;text-transform:none;letter-spacing:0;font-weight:600;font-size:13.5px;color:var(--ink);margin:9px 0 0}
+.b label.chk input{width:18px;height:18px;flex:none;accent-color:var(--navy)}
+.refine{display:flex;gap:10px;align-items:flex-start;margin-top:14px;font-size:12.5px;color:var(--ink);line-height:1.55}
+.refine .lt{background:var(--rg);color:#fff}
+.signup{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+.signup input{font-family:Montserrat;font-size:15px;padding:14px 16px;border-radius:40px;border:1.5px solid #2E4C7A;background:#0F223F;color:#fff}
+.signup input::placeholder{color:#8B97AD}
+.signup .btn{margin-top:0}
+.fine{font-size:12px;color:#9FA9BD;margin-top:8px;text-align:center}
+.bh-form{margin-top:14px;min-height:120px}
+.done{display:none;background:var(--navy2);border:1px solid var(--rg);border-radius:14px;padding:14px;margin-top:14px;font-size:14px}
+footer{color:#7F8AA3;font-size:12px;text-align:center;padding:40px 18px 50px;line-height:1.7}
+footer a{color:var(--rg2)}
+
+.neon{color:#FF4FA3} .teal{color:#3EE6D2}
+.cover{position:relative;border-radius:18px;overflow:hidden;margin-top:12px;aspect-ratio:9/12;background:#000}
+.cover img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block}
+.cover .over{position:absolute;left:0;right:0;bottom:0;padding:20px;background:rgba(11,26,51,.82)}
+.list{margin-top:12px;padding-left:0;list-style:none} .list li{padding:7px 0 7px 26px;position:relative;color:#D9D2CC;font-size:14px}
+.list li:before{content:"✓";position:absolute;left:0;color:var(--rg);font-weight:900}
+.scene{margin-top:34px;border-top:1px solid #23406B;padding-top:26px}
+.scene .num{font-weight:900;color:var(--rg);font-size:13px;letter-spacing:3px}
+.shot{width:100%;border-radius:14px;display:block;margin-top:12px}
+.vid{width:100%;border-radius:14px;display:block;margin-top:12px;background:#000}
+.pbox{background:var(--ivory);color:var(--ink);border-radius:14px;padding:16px;margin-top:12px;font-size:13.5px;line-height:1.65}
+.pbox .lab{font-weight:900;font-size:11px;letter-spacing:1.6px;color:var(--rg);margin-bottom:6px}
+.pbox.dark{background:#0F223F;color:#E6DED7;border:1px solid #23406B}
+.copy{margin-top:10px;padding:12px}
+.note{font-size:12px;color:#9FA9BD;margin-top:8px}
+.lock{background:var(--navy2);border:1px solid #23406B;border-radius:16px;padding:18px;margin-top:16px}
+.lock h3{margin-bottom:6px}
+.lock .muted b{color:#fff}
+</style></head><body><div class="wrap"><div class="top"><div class="mark">Build Smarter<span>with Micaya</span></div></div>
+  <div class="cover"><video src="media/neon-nights/walk.mp4" poster="media/neon-nights/03.jpg" autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;object-position:center 25%;display:block"></video>
+    <div class="over"><div class="kicker">Free prompt guide</div>
+      <h1 style="margin-top:6px;font-size:30px">Neon <em>Nights</em></h1>
+      <p style="color:#D9D2CC;font-size:14px;margin-top:6px">If GTA 6 had a solo female lead… These are the exact prompts behind every image in my post.</p></div></div>
+  <div class="sec" style="margin-top:22px">
+    <h2>Get instant access</h2>
+    <ul class="list">
+      <li>6 copy-and-paste image prompts, one for every scene</li>
+      <li>"Make it move" video prompts, plus the B-roll clips they made</li>
+      <li>The couples version and what I learned the hard way</li>
+      <li>The full guide as a PDF to keep</li>
+    </ul>
+    <p class="muted" style="margin-top:10px">Enter your email and you'll go straight to the prompts.</p>
+    <div class="bh-form"><script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="bddb61e0-187f-4737-8529-2c37f72cd0a0"></script></div>
+    <div class="fine">You'll also get Build Smarter Weekly, my free AI tips email, plus a welcome gift. Unsubscribe anytime.</div>
+  </div>
+</div><footer>Every image and video on this page is my AI twin, made with AI.<br>No game logos or titles, just the vibe.<br>@buildsmarterwithmicaya · Instagram · TikTok · Facebook · YouTube<br>© 2026 Build Smarter with Micaya</footer>
+<script type="text/javascript" async src="https://subscribe-forms.beehiiv.com/attribution.js"></script>
+<script>setTimeout(()=>{document.querySelectorAll('.bh-form').forEach(d=>{if(!d.querySelector('iframe,form')){d.style.minHeight='0';d.insertAdjacentHTML('beforeend','<a class="btn" href="https://buildsmarter-newsletter.beehiiv.com/subscribe?utm_source=neon_fallback">Sign up here →</a>')}})},4000);</script>
+</body></html>

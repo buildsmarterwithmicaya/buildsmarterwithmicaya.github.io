@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow"><title>Neon Nights Prompts · Build Smarter with Micaya</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@1,500;1,600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0B1A33;--navy2:#13284A;--navy3:#1A3460;--rg:#C9907A;--rg2:#E2B8A6;--ivory:#FAF6F1;--line:#E8DDD3;--ink:#1B2333;--mute:#6B7280}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Montserrat,sans-serif;background:var(--navy);color:#F6EEE7;line-height:1.55;font-size:15px}
+.preview{background:#FFF3D6;color:#7A5300;text-align:center;font-size:12px;font-weight:700;letter-spacing:.5px;padding:8px 12px}
+.wrap{max-width:520px;margin:0 auto;padding:0 18px}
+.top{display:flex;align-items:center;gap:10px;padding:22px 0 8px}
+.top .mark{font-weight:800;font-size:13px;letter-spacing:2.5px;text-transform:uppercase;line-height:1.25}
+.top .mark span{display:block;color:var(--rg2);font-weight:600;letter-spacing:3px;font-size:11px}
+.hero{position:relative;border-radius:18px;overflow:hidden;margin-top:12px;aspect-ratio:9/13;background:#000}
+.hero video{width:100%;height:100%;object-fit:cover;display:block}
+.hero .over{position:absolute;left:0;right:0;bottom:0;padding:22px 20px;background:rgba(11,26,51,.78)}
+.serif{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500}
+h1{font-weight:900;font-size:30px;line-height:1.06;color:#fff}
+h1 em{font-style:normal;color:var(--rg)}
+.hero p{color:#D9D2CC;font-size:14px;margin-top:8px}
+.sig{color:var(--rg2);font-size:17px;margin-top:6px}
+.btn{display:block;text-align:center;background:var(--rg);color:#fff;text-decoration:none;font-weight:800;font-size:14px;letter-spacing:.5px;padding:15px 18px;border-radius:40px;margin-top:14px;border:0;cursor:pointer;width:100%;font-family:Montserrat}
+.btn.ghost{background:transparent;border:1.5px solid var(--rg2);color:var(--rg2)}
+.btn.dark{background:var(--navy)}
+.sec{margin-top:34px}
+.kicker{font-size:11px;letter-spacing:3px;font-weight:700;color:var(--rg2);text-transform:uppercase}
+h2{font-weight:900;font-size:22px;color:#fff;margin:6px 0 8px;line-height:1.15}
+.muted{color:#C9C1BA;font-size:14px}
+.card{background:var(--navy2);border:1px solid #23406B;border-radius:16px;padding:18px;margin-top:14px}
+.light{background:var(--ivory);color:var(--ink);border:0}
+.light h3{color:var(--navy)}
+h3{font-weight:800;font-size:17px;color:#fff}
+.prod{display:grid;grid-template-columns:120px 1fr;gap:14px;align-items:center}
+.prod img,.prod video{width:120px;border-radius:10px;display:block}
+.prod video{height:160px;object-fit:cover}
+.price{font-weight:900;color:var(--rg);font-size:18px;margin-top:4px}
+.tag{display:inline-block;background:var(--rg);color:#fff;font-size:10px;font-weight:800;letter-spacing:2px;padding:4px 9px;border-radius:20px;margin-bottom:6px}
+.tag.soon{background:#2A4570}
+.small{font-size:13px;color:#C9C1BA;margin-top:4px}
+.light .small{color:var(--mute)}
+/* builder */
+.b label{display:block;font-size:11px;font-weight:800;letter-spacing:1.5px;color:var(--rg);margin:12px 0 5px;text-transform:uppercase}
+.b select,.b input,.b textarea{width:100%;font-family:Montserrat;font-size:14px;padding:11px 12px;border-radius:10px;border:1px solid var(--line);background:#fff;color:var(--ink)}
+.b textarea{min-height:76px;resize:vertical}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.out{background:var(--navy);color:#F6EEE7;border-radius:12px;padding:14px;margin-top:14px;font-size:13.5px;white-space:pre-wrap;line-height:1.6}
+.out b{color:var(--rg2);font-size:11px;letter-spacing:1.4px}
+.hint{font-size:12px;color:var(--mute);margin-top:6px}
+.tools{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.tool{background:var(--navy2);border:1px solid #23406B;border-radius:12px;padding:12px;font-size:13px}
+.tool b{display:block;color:#fff;font-size:14px}
+.tool span{color:#9FA9BD;font-size:12px}
+.studio{position:relative;border-radius:16px;overflow:hidden;margin-top:14px;display:grid;grid-template-columns:1fr 1fr;background:var(--navy2);border:1px solid #23406B}
+.studio img{width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block}
+.studio .t{padding:18px 16px}
+.step{display:flex;align-items:center;gap:9px;margin:22px 0 2px;font-weight:900;font-size:14px;color:var(--navy);padding-top:14px;border-top:1px solid var(--line)}
+.step:first-child{margin-top:0;padding-top:0;border-top:0}
+.lt{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--navy);color:var(--rg2);font-weight:900;font-size:13px;flex:none}
+.b label.chk{display:flex;align-items:center;gap:9px;text-transform:none;letter-spacing:0;font-weight:600;font-size:13.5px;color:var(--ink);margin:9px 0 0}
+.b label.chk input{width:18px;height:18px;flex:none;accent-color:var(--navy)}
+.refine{display:flex;gap:10px;align-items:flex-start;margin-top:14px;font-size:12.5px;color:var(--ink);line-height:1.55}
+.refine .lt{background:var(--rg);color:#fff}
+.signup{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+.signup input{font-family:Montserrat;font-size:15px;padding:14px 16px;border-radius:40px;border:1.5px solid #2E4C7A;background:#0F223F;color:#fff}
+.signup input::placeholder{color:#8B97AD}
+.signup .btn{margin-top:0}
+.fine{font-size:12px;color:#9FA9BD;margin-top:8px;text-align:center}
+.bh-form{margin-top:14px;min-height:120px}
+.done{display:none;background:var(--navy2);border:1px solid var(--rg);border-radius:14px;padding:14px;margin-top:14px;font-size:14px}
+footer{color:#7F8AA3;font-size:12px;text-align:center;padding:40px 18px 50px;line-height:1.7}
+footer a{color:var(--rg2)}
+
+.neon{color:#FF4FA3} .teal{color:#3EE6D2}
+.cover{position:relative;border-radius:18px;overflow:hidden;margin-top:12px;aspect-ratio:9/12;background:#000}
+.cover img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block}
+.cover .over{position:absolute;left:0;right:0;bottom:0;padding:20px;background:rgba(11,26,51,.82)}
+.list{margin-top:12px;padding-left:0;list-style:none} .list li{padding:7px 0 7px 26px;position:relative;color:#D9D2CC;font-size:14px}
+.list li:before{content:"✓";position:absolute;left:0;color:var(--rg);font-weight:900}
+.scene{margin-top:34px;border-top:1px solid #23406B;padding-top:26px}
+.scene .num{font-weight:900;color:var(--rg);font-size:13px;letter-spacing:3px}
+.shot{width:100%;border-radius:14px;display:block;margin-top:12px}
+.vid{width:100%;border-radius:14px;display:block;margin-top:12px;background:#000}
+.pbox{background:var(--ivory);color:var(--ink);border-radius:14px;padding:16px;margin-top:12px;font-size:13.5px;line-height:1.65}
+.pbox .lab{font-weight:900;font-size:11px;letter-spacing:1.6px;color:var(--rg);margin-bottom:6px}
+.pbox.dark{background:#0F223F;color:#E6DED7;border:1px solid #23406B}
+.copy{margin-top:10px;padding:12px}
+.note{font-size:12px;color:#9FA9BD;margin-top:8px}
+.lock{background:var(--navy2);border:1px solid #23406B;border-radius:16px;padding:18px;margin-top:16px}
+.lock h3{margin-bottom:6px}
+.lock .muted b{color:#fff}
+</style></head><body><div class="wrap"><div class="top"><div class="mark">Build Smarter<span>with Micaya</span></div></div>
+  <div class="sec" style="margin-top:18px">
+    <div class="kicker">You're in</div>
+    <h1 style="margin-top:6px;font-size:30px">Neon <em>Nights</em> prompts</h1>
+    <p class="muted" style="margin-top:8px">Six scenes, the exact prompts behind each one, and the video prompts that made them move. Swap the brackets for your own details and keep everything else word for word.</p>
+    <a class="btn ghost" href="media/neon-nights/Neon_Nights_GTA_Prompt_Pack.pdf" download>Download the full PDF guide</a>
+  </div>
+  <div class="lock">
+    <h3>Before you start: your Twin Lock</h3>
+    <p class="muted">Every prompt has the same fill-in brackets. Write them once and reuse them in every scene, so it's the same woman every time: <b>[YOUR TWIN]</b> (age and look), <b>[BODY TYPE]</b>, <b>[HAIR COLOR]</b> + <b>[HAIR STYLE]</b>, <b>[EYE COLOR]</b>, <b>[SIMPLE JEWELRY]</b>.</p>
+    <p class="muted" style="margin-top:8px">Use a tool that saves your face as a character (I used Higgsfield Soul 2.0 with my trained Soul ID). Portrait 9:16, 2–3 options per prompt. Other tools can work too, so test one cheap, low-quality generation first.</p>
+  </div>
+
+  <div class="scene" id="s01">
+    <div class="num">SCENE 01</div>
+    <h2 style="margin-top:4px">The Getaway</h2>
+    <p class="muted">A parked convertible at sunset, the &quot;main character just pulled up&quot; shot.</p>
+    <img class="shot" src="media/neon-nights/01.jpg" alt="The Getaway, made with the prompt below" loading="lazy">
+    <div class="pbox"><div class="lab">IMAGE PROMPT</div><div class="ptext">Waist-up medium shot, cinematic sunset photo of [YOUR TWIN — e.g. petite woman in her 40s], [BODY TYPE — e.g. slim thick, athletic, toned defined abs]. [HAIR COLOR] hair in [HAIR STYLE]. [EYE COLOR] eyes, [SIMPLE JEWELRY — e.g. diamond stud earrings, wedding ring]. Open hot-pink leather moto jacket, black cropped tube top, black high-waisted jeans. She sits in the driver&#x27;s seat of a parked white 1980s convertible with the top down and the driver&#x27;s door closed, her left forearm resting on top of the closed door, her right hand on the steering wheel, face toward the camera, soft natural closed-mouth smile. Framed from the waist up, her face large and clear in the frame. Behind her a calm waterfront bay with teal water, palm trees and a pastel art-deco skyline with pink and teal neon starting to glow under an orange-pink sunset sky; the car is parked, no traffic. Warm golden sunset light on her face. Background sharp and in focus, deep depth of field. She is alone, both hands visible and natural. No text, no logos. Photorealistic, ultra-realistic skin texture with visible pores, modern phone camera look, cinematic color grade.</div></div>
+    <button class="btn copy" data-t="ip01">Copy image prompt</button>
+    <div class="note">Made with this exact prompt · hair: loose waves, natural middle part</div>
+    
+    <div class="pbox dark"><div class="lab">MAKE IT MOVE · VIDEO PROMPT</div><div class="ptext">Real-time speed, single continuous take, no cuts, no transitions, no speed ramps, no slow motion. Camera: a breathing tripod frame, no handheld shake, no pans. 0.0s to 2.0s: she turns her head toward the water as the breeze lifts her hair. 2.0s to 4.0s: she turns back and looks into the camera with a soft smile. 4.0s to 5.0s: she holds the look. Background in real time: water ripples, palm trees sway, the skyline neon glows. Same woman, same face and features as the first frame throughout, she does not talk. Photorealistic, no distortion, no extra people, no text.</div></div>
+    <button class="btn ghost copy" data-t="mp01">Copy video prompt</button>
+    <div class="note">Start and end frame = your image · 5 seconds · 720p · no audio</div>
+  </div>
+  <div class="scene" id="s02">
+    <div class="num">SCENE 02</div>
+    <h2 style="margin-top:4px">Loading Screen</h2>
+    <p class="muted">Sitting on the hood of a muscle car, like a game loading screen.</p>
+    <img class="shot" src="media/neon-nights/02.jpg" alt="Loading Screen, made with the prompt below" loading="lazy">
+    <div class="pbox"><div class="lab">IMAGE PROMPT</div><div class="ptext">Waist-up medium shot, cinematic night photo of [YOUR TWIN — e.g. petite woman in her 40s], [BODY TYPE — e.g. slim thick, athletic, toned defined abs]. [HAIR COLOR] hair in [HAIR STYLE]. [EYE COLOR] eyes, [SIMPLE JEWELRY — e.g. diamond stud earrings, wedding ring]. Open hot-pink leather moto jacket, black cropped tube top, black high-waisted jeans. She sits on the hood of a parked glossy black 1970s muscle car, one hand resting on the hood beside her, the other on her knee, face toward the camera, soft natural closed-mouth smile. Framed from the waist up, her face large and clear in the frame. Behind her a retro two-story beach motel outlined in hot-pink and teal neon tube shapes, palm trees, purple night sky with a last band of orange sunset, wet pavement reflecting neon; the neon signs are shapes only. Hot-pink and teal neon rim light on her. Background sharp and in focus, deep depth of field. She is alone, both hands visible and natural. No text, no logos. Photorealistic, ultra-realistic skin texture with visible pores, modern phone camera look, cinematic color grade.</div></div>
+    <button class="btn copy" data-t="ip02">Copy image prompt</button>
+    <div class="note">Made with this exact prompt · hair: loose waves, natural middle part</div>
+    
+    <div class="pbox dark"><div class="lab">MAKE IT MOVE · VIDEO PROMPT</div><div class="ptext">Real-time speed, single continuous take, no cuts, no transitions, no speed ramps, no slow motion. Camera: a breathing tripod frame, no handheld shake, no pans. 0.0s to 2.0s: she lifts her chin and settles her hand on the hood. 2.0s to 4.0s: she gives the camera a confident look and a small smile. 4.0s to 5.0s: she holds still. Background in real time: neon flickers, reflections ripple on the wet pavement, palm fronds move in the wind. Same woman, same face and features as the first frame throughout, she does not talk. Photorealistic, no distortion, no extra people, no text.</div></div>
+    <button class="btn ghost copy" data-t="mp02">Copy video prompt</button>
+    <div class="note">Start and end frame = your image · 5 seconds · 720p · no audio</div>
+  </div>
+  <div class="scene" id="s03">
+    <div class="num">SCENE 03</div>
+    <h2 style="margin-top:4px">The Walk</h2>
+    <p class="muted">Walking toward the camera through a neon alley. Big energy, no props needed.</p>
+    <img class="shot" src="media/neon-nights/03.jpg" alt="The Walk, made with the prompt below" loading="lazy">
+    <div class="pbox"><div class="lab">IMAGE PROMPT</div><div class="ptext">Waist-up medium shot, cinematic night photo of [YOUR TWIN — e.g. petite woman in her 40s], [BODY TYPE — e.g. slim thick, athletic, toned defined abs]. [HAIR COLOR] hair in [a sleek slicked-back ponytail]. [EYE COLOR] eyes, [SIMPLE JEWELRY — e.g. diamond stud earrings, wedding ring]. Open hot-pink leather moto jacket, black cropped tube top, black high-waisted jeans. She walks toward the camera mid-stride down a narrow alley, arms relaxed and natural at her sides, face toward the camera, soft natural closed-mouth smile. Framed from mid-thigh up, her face large and clear in the frame. Behind her brick walls lined with hot-pink and teal neon tube lights, light steam, wet pavement reflecting neon, a parked classic car at the end of the alley. Hot-pink and teal neon rim light on her. Background sharp and in focus, deep depth of field. She is alone, both hands visible and natural. No text, no logos. Photorealistic, ultra-realistic skin texture with visible pores, modern phone camera look, cinematic color grade.</div></div>
+    <button class="btn copy" data-t="ip03">Copy image prompt</button>
+    <div class="note">Made with this exact prompt · hair: sleek slicked-back ponytail</div>
+    <video class="vid" src="media/neon-nights/walk.mp4" autoplay muted loop playsinline></video><div class="note">My B-roll clip from this prompt (Seedance, 5 seconds, start and end frame = the image).</div>
+    <div class="pbox dark"><div class="lab">MAKE IT MOVE · VIDEO PROMPT</div><div class="ptext">Real-time speed, single continuous take, no cuts, no transitions, no speed ramps, no slow motion. Camera: a breathing tripod frame, no handheld shake, no pans. 0.0s to 3.0s: she walks two full steps toward the camera at a normal pace, arms swinging naturally. 3.0s to 5.0s: she slows to a stop and gives a soft smile into the camera. Background in real time: steam drifts, neon reflections shimmer on the wet ground. Same woman, same face and features as the first frame throughout, she does not talk. Photorealistic, no distortion, no extra people, no text.</div></div>
+    <button class="btn ghost copy" data-t="mp03">Copy video prompt</button>
+    <div class="note">Start and end frame = your image · 5 seconds · 720p · no audio</div>
+  </div>
+  <div class="scene" id="s04">
+    <div class="num">SCENE 04</div>
+    <h2 style="margin-top:4px">Golden Hour Run</h2>
+    <p class="muted">At the helm of a moving boat, neon skyline behind you. Soft life meets GTA.</p>
+    <img class="shot" src="media/neon-nights/04.jpg" alt="Golden Hour Run, made with the prompt below" loading="lazy">
+    <div class="pbox"><div class="lab">IMAGE PROMPT</div><div class="ptext">Waist-up medium shot, cinematic golden hour photo of [YOUR TWIN — e.g. petite woman in her 40s], [BODY TYPE — e.g. slim thick, athletic, toned defined abs]. [HAIR COLOR] hair in [loose waves, moving in the wind]. [EYE COLOR] eyes, [SIMPLE JEWELRY — e.g. diamond stud earrings, wedding ring]. Open hot-pink leather moto jacket, black cropped tube top, black high-waisted jeans. She stands at the helm of a moving white speedboat, one hand on the steering wheel behind the windshield, the other resting on her hip, face toward the camera, soft natural closed-mouth smile. Framed from mid-thigh up, her face large and clear in the frame. Behind her bright teal water with a white wake trailing behind the boat, a waterfront skyline of modern towers and pastel art-deco hotels with hot-pink and teal neon tube outlines and a glowing neon palm-tree shape on the buildings, palm trees along the shore, warm orange-pink sunset sky. Warm golden-hour sunlight on her face. Background sharp and in focus, deep depth of field. She is alone, both hands visible and natural. No text, no logos. Photorealistic, ultra-realistic skin texture with visible pores, modern phone camera look, cinematic color grade.</div></div>
+    <button class="btn copy" data-t="ip04">Copy image prompt</button>
+    <div class="note">Made with this exact prompt · hair: loose waves, moving in the wind</div>
+    
+    <div class="pbox dark"><div class="lab">MAKE IT MOVE · VIDEO PROMPT</div><div class="ptext">Real-time speed, single continuous take, no cuts, no transitions, no speed ramps, no slow motion. Camera: a breathing tripod frame, no handheld shake, no pans. 0.0s to 2.0s: she glances over her shoulder at the skyline, hair blowing back. 2.0s to 4.0s: she turns back to the camera with a soft smile, hand steady on the wheel. 4.0s to 5.0s: she holds the look. Background in real time: the wake churns, spray rises, the boat moves forward. Same woman, same face and features as the first frame throughout, she does not talk. Photorealistic, no distortion, no extra people, no text.</div></div>
+    <button class="btn ghost copy" data-t="mp04">Copy video prompt</button>
+    <div class="note">Start and end frame = your image · 5 seconds · 720p · no audio</div>
+  </div>
+  <div class="scene" id="s05">
+    <div class="num">SCENE 05</div>
+    <h2 style="margin-top:4px">Top of the City</h2>
+    <p class="muted">Rooftop at night, helicopter spotlight overhead. The most &quot;GTA&quot; shot in the set.</p>
+    <img class="shot" src="media/neon-nights/05.jpg" alt="Top of the City, made with the prompt below" loading="lazy">
+    <div class="pbox"><div class="lab">IMAGE PROMPT</div><div class="ptext">Waist-up medium shot, cinematic night photo of [YOUR TWIN — e.g. petite woman in her 40s], [BODY TYPE — e.g. slim thick, athletic, toned defined abs]. [HAIR COLOR] hair in [a sleek slicked-back ponytail]. [EYE COLOR] eyes, [SIMPLE JEWELRY — e.g. diamond stud earrings, wedding ring]. Open hot-pink leather moto jacket, black cropped tube top, She stands on a rooftop leaning one forearm on a glass railing, body angled slightly, face toward the camera, soft natural closed-mouth smile. Framed from mid-thigh up, her face large and clear in the frame. Behind her a city skyline glowing with hot-pink and teal neon, a helicopter with a spotlight in the purple night sky, palm trees below. Hot-pink and teal neon rim light on her. Background sharp and in focus, deep depth of field. She is alone, both hands visible and natural. No text, no logos. Photorealistic, ultra-realistic skin texture with visible pores, modern phone camera look, cinematic color grade.</div></div>
+    <button class="btn copy" data-t="ip05">Copy image prompt</button>
+    <div class="note">Made with this exact prompt · hair: sleek slicked-back ponytail</div>
+    <video class="vid" src="media/neon-nights/rooftop.mp4" autoplay muted loop playsinline></video><div class="note">My B-roll clip from this prompt (Seedance, 5 seconds, start and end frame = the image).</div>
+    <div class="pbox dark"><div class="lab">MAKE IT MOVE · VIDEO PROMPT</div><div class="ptext">Real-time speed, single continuous take, no cuts, no transitions, no speed ramps, no slow motion. Camera: a breathing tripod frame, no handheld shake, no pans. 0.0s to 2.0s: she turns her head and glances up toward the helicopter in the sky behind her. 2.0s to 4.0s: she turns back and looks straight into the camera with a soft, natural smile. 4.0s to 5.0s: she holds the look, forearm resting on the railing. Background in real time: the helicopter flies across the sky with its spotlight sweeping, car headlights drive along the street below. Same woman, same face and features as the first frame throughout, she does not talk. Photorealistic, no distortion, no extra people, no text.</div></div>
+    <button class="btn ghost copy" data-t="mp05">Copy video prompt</button>
+    <div class="note">Start and end frame = your image · 5 seconds · 720p · no audio</div>
+  </div>
+  <div class="scene" id="s06">
+    <div class="num">SCENE 06</div>
+    <h2 style="margin-top:4px">Neon Diner</h2>
+    <p class="muted">Retro diner booth, strawberry milkshake, neon in the window.</p>
+    <img class="shot" src="media/neon-nights/06.jpg" alt="Neon Diner, made with the prompt below" loading="lazy">
+    <div class="pbox"><div class="lab">IMAGE PROMPT</div><div class="ptext">Waist-up medium shot, cinematic night photo of [YOUR TWIN — e.g. petite woman in her 40s], [BODY TYPE — e.g. slim thick, athletic, toned defined abs]. [HAIR COLOR] hair in [HAIR STYLE]. [EYE COLOR] eyes, [SIMPLE JEWELRY — e.g. diamond stud earrings, wedding ring]. Open hot-pink leather moto jacket, black cropped tube top, black high-waisted jeans. She sits in a red vinyl booth of a retro 1980s diner, one forearm resting on the table beside a strawberry milkshake glass, the other hand relaxed in her lap, face toward the camera, soft natural closed-mouth smile. Framed from the waist up, her face large and clear in the frame. Behind her a large window with hot-pink and teal neon tube shapes glowing, chrome details, checkered floor, palm trees and a parked classic car visible outside at night. Hot-pink and teal neon glow on her face. Background sharp and in focus, deep depth of field. She is alone, both hands visible and natural. No text, no logos. Photorealistic, ultra-realistic skin texture with visible pores, modern phone camera look, cinematic color grade.</div></div>
+    <button class="btn copy" data-t="ip06">Copy image prompt</button>
+    <div class="note">Made with this exact prompt · hair: loose waves, natural middle part</div>
+    
+    <div class="pbox dark"><div class="lab">MAKE IT MOVE · VIDEO PROMPT</div><div class="ptext">Real-time speed, single continuous take, no cuts, no transitions, no speed ramps, no slow motion. Camera: a breathing tripod frame, no handheld shake, no pans. 0.0s to 2.0s: she glances out the window as headlights pass outside. 2.0s to 4.0s: she looks back at the camera with a soft smile. 4.0s to 5.0s: she holds the look. Background in real time: car headlights move past outside, the neon hums and glows. Same woman, same face and features as the first frame throughout, she does not talk. Photorealistic, no distortion, no extra people, no text.</div></div>
+    <button class="btn ghost copy" data-t="mp06">Copy video prompt</button>
+    <div class="note">Start and end frame = your image · 5 seconds · 720p · no audio</div>
+  </div>
+  <div class="scene">
+    <div class="num">WHAT I LEARNED THE HARD WAY</div>
+    <ul class="list">
+      <li><b style="color:#fff">Waist-up framing</b> keeps your face big enough for the AI to hold on to, especially in video.</li>
+      <li><b style="color:#fff">Background in focus.</b> Blur in your image carries straight into your video.</li>
+      <li><b style="color:#fff">Scenes have to make sense.</b> A moving car needs a driver. When in doubt, park the car.</li>
+      <li><b style="color:#fff">Video in real time, one action per beat.</b> Skip "slowly" and "subtle," AI video already leans slow-motion.</li>
+      <li><b style="color:#fff">No game logos or titles.</b> Get the vibe from hot pink, teal, palm trees and neon.</li>
+    </ul>
+    <p class="muted" style="margin-top:8px">The couples version is in the PDF.</p>
+  </div>
+  <div class="sec">
+    <div class="kicker">Ready for more?</div>
+    <h2>Make your twin the main character every day</h2>
+    <div class="card light prod">
+      <img src="media/pack_cover.jpg" alt="The Everyday AI Twin Prompt Pack cover">
+      <div><span class="tag">$19</span>
+        <h3>The Everyday AI Twin Prompt Pack</h3>
+        <div class="small">50 image prompts and 10 video motion prompts for real life: work, soft life, travel, editorial and more.</div>
+        <a class="btn dark" href="https://payhip.com/b/Dcal9" style="margin-top:8px;padding:11px">Get the pack →</a></div>
+    </div>
+    <div class="card prod">
+      <video src="media/neon-nights/rooftop.mp4" autoplay muted loop playsinline></video>
+      <div><span class="tag soon">COMING SOON</span>
+        <h3>The AI Twin Video Kit</h3>
+        <div class="small">Turn your twin images into B-roll and talking videos, using the same real-time workflow you just learned.</div></div>
+    </div>
+    <a class="btn ghost" href="https://buildsmarterwithmicaya.github.io/#studio">Join the Studio early-access list →</a>
+  </div>
+</div><footer>Every image and video on this page is my AI twin, made with AI.<br>No game logos or titles, just the vibe.<br>@buildsmarterwithmicaya · Instagram · TikTok · Facebook · YouTube<br>© 2026 Build Smarter with Micaya</footer>
+<script>
+const T={};T['ip01']="Waist-up medium shot, cinematic sunset photo of [YOUR TWIN \u2014 e.g. petite woman in her 40s], [BODY TYPE \u2014 e.g. slim thick, athletic, toned defined abs]. [HAIR COLOR] hair in [HAIR STYLE]. [EYE COLOR] eyes, [SIMPLE JEWELRY \u2014 e.g. diamond stud earrings, wedding ring]. Open hot-pink leather moto jacket, black cropped tube top, black high-waisted jeans. She sits in the driver's seat of a parked white 1980s convertible with the top down and the driver's door closed, her left forearm resting on top of the closed door, her right hand on the steering wheel, face toward the camera, soft natural closed-mouth smile. Framed from the waist up, her face large and clear in the frame. Behind her a calm waterfront bay with teal water, palm trees and a pastel art-deco skyline with pink and teal neon starting to glow under an orange-pink sunset sky; the car is parked, no traffic. Warm golden sunset light on her face. Background sharp and in focus, deep depth of field. She is alone, both hands visible and natural. No text, no logos. Photorealistic, ultra-realistic skin texture with visible pores, modern phone camera look, cinematic color grade.";T['mp01']="Real-time speed, single continuous take, no cuts, no transitions, no speed ramps, no slow motion. Camera: a breathing tripod frame, no handheld shake, no pans. 0.0s to 2.0s: she turns her head toward the water as the breeze lifts her hair. 2.0s to 4.0s: she turns back and looks into the camera with a soft smile. 4.0s to 5.0s: she holds the look. Background in real time: water ripples, palm trees sway, the skyline neon glows. Same woman, same face and features as the first frame throughout, she does not talk. Photorealistic, no distortion, no extra people, no text.";T['ip02']="Waist-up medium shot, cinematic night photo of [YOUR TWIN \u2014 e.g. petite woman in her 40s], [BODY TYPE \u2014 e.g. slim thick, athletic, toned defined abs]. [HAIR COLOR] hair in [HAIR STYLE]. [EYE COLOR] eyes, [SIMPLE JEWELRY \u2014 e.g. diamond stud earrings, wedding ring]. Open hot-pink leather moto jacket, black cropped tube top, black high-waisted jeans. She sits on the hood of a parked glossy black 1970s muscle car, one hand resting on the hood beside her, the other on her knee, face toward the camera, soft natural closed-mouth smile. Framed from the waist up, her face large and clear in the frame. Behind her a retro two-story beach motel outlined in hot-pink and teal neon tube shapes, palm trees, purple night sky with a last band of orange sunset, wet pavement reflecting neon; the neon signs are shapes only. Hot-pink and teal neon rim light on her. Background sharp and in focus, deep depth of field. She is alone, both hands visible and natural. No text, no logos. Photorealistic, ultra-realistic skin texture with visible pores, modern phone camera look, cinematic color grade.";T['mp02']="Real-time speed, single continuous take, no cuts, no transitions, no speed ramps, no slow motion. Camera: a breathing tripod frame, no handheld shake, no pans. 0.0s to 2.0s: she lifts her chin and settles her hand on the hood. 2.0s to 4.0s: she gives the camera a confident look and a small smile. 4.0s to 5.0s: she holds still. Background in real time: neon flickers, reflections ripple on the wet pavement, palm fronds move in the wind. Same woman, same face and features as the first frame throughout, she does not talk. Photorealistic, no distortion, no extra people, no text.";T['ip03']="Waist-up medium shot, cinematic night photo of [YOUR TWIN \u2014 e.g. petite woman in her 40s], [BODY TYPE \u2014 e.g. slim thick, athletic, toned defined abs]. [HAIR COLOR] hair in [a sleek slicked-back ponytail]. [EYE COLOR] eyes, [SIMPLE JEWELRY \u2014 e.g. diamond stud earrings, wedding ring]. Open hot-pink leather moto jacket, black cropped tube top, black high-waisted jeans. She walks toward the camera mid-stride down a narrow alley, arms relaxed and natural at her sides, face toward the camera, soft natural closed-mouth smile. Framed from mid-thigh up, her face large and clear in the frame. Behind her brick walls lined with hot-pink and teal neon tube lights, light steam, wet pavement reflecting neon, a parked classic car at the end of the alley. Hot-pink and teal neon rim light on her. Background sharp and in focus, deep depth of field. She is alone, both hands visible and natural. No text, no logos. Photorealistic, ultra-realistic skin texture with visible pores, modern phone camera look, cinematic color grade.";T['mp03']="Real-time speed, single continuous take, no cuts, no transitions, no speed ramps, no slow motion. Camera: a breathing tripod frame, no handheld shake, no pans. 0.0s to 3.0s: she walks two full steps toward the camera at a normal pace, arms swinging naturally. 3.0s to 5.0s: she slows to a stop and gives a soft smile into the camera. Background in real time: steam drifts, neon reflections shimmer on the wet ground. Same woman, same face and features as the first frame throughout, she does not talk. Photorealistic, no distortion, no extra people, no text.";T['ip04']="Waist-up medium shot, cinematic golden hour photo of [YOUR TWIN \u2014 e.g. petite woman in her 40s], [BODY TYPE \u2014 e.g. slim thick, athletic, toned defined abs]. [HAIR COLOR] hair in [loose waves, moving in the wind]. [EYE COLOR] eyes, [SIMPLE JEWELRY \u2014 e.g. diamond stud earrings, wedding ring]. Open hot-pink leather moto jacket, black cropped tube top, black high-waisted jeans. She stands at the helm of a moving white speedboat, one hand on the steering wheel behind the windshield, the other resting on her hip, face toward the camera, soft natural closed-mouth smile. Framed from mid-thigh up, her face large and clear in the frame. Behind her bright teal water with a white wake trailing behind the boat, a waterfront skyline of modern towers and pastel art-deco hotels with hot-pink and teal neon tube outlines and a glowing neon palm-tree shape on the buildings, palm trees along the shore, warm orange-pink sunset sky. Warm golden-hour sunlight on her face. Background sharp and in focus, deep depth of field. She is alone, both hands visible and natural. No text, no logos. Photorealistic, ultra-realistic skin texture with visible pores, modern phone camera look, cinematic color grade.";T['mp04']="Real-time speed, single continuous take, no cuts, no transitions, no speed ramps, no slow motion. Camera: a breathing tripod frame, no handheld shake, no pans. 0.0s to 2.0s: she glances over her shoulder at the skyline, hair blowing back. 2.0s to 4.0s: she turns back to the camera with a soft smile, hand steady on the wheel. 4.0s to 5.0s: she holds the look. Background in real time: the wake churns, spray rises, the boat moves forward. Same woman, same face and features as the first frame throughout, she does not talk. Photorealistic, no distortion, no extra people, no text.";T['ip05']="Waist-up medium shot, cinematic night photo of [YOUR TWIN \u2014 e.g. petite woman in her 40s], [BODY TYPE \u2014 e.g. slim thick, athletic, toned defined abs]. [HAIR COLOR] hair in [a sleek slicked-back ponytail]. [EYE COLOR] eyes, [SIMPLE JEWELRY \u2014 e.g. diamond stud earrings, wedding ring]. Open hot-pink leather moto jacket, black cropped tube top, She stands on a rooftop leaning one forearm on a glass railing, body angled slightly, face toward the camera, soft natural closed-mouth smile. Framed from mid-thigh up, her face large and clear in the frame. Behind her a city skyline glowing with hot-pink and teal neon, a helicopter with a spotlight in the purple night sky, palm trees below. Hot-pink and teal neon rim light on her. Background sharp and in focus, deep depth of field. She is alone, both hands visible and natural. No text, no logos. Photorealistic, ultra-realistic skin texture with visible pores, modern phone camera look, cinematic color grade.";T['mp05']="Real-time speed, single continuous take, no cuts, no transitions, no speed ramps, no slow motion. Camera: a breathing tripod frame, no handheld shake, no pans. 0.0s to 2.0s: she turns her head and glances up toward the helicopter in the sky behind her. 2.0s to 4.0s: she turns back and looks straight into the camera with a soft, natural smile. 4.0s to 5.0s: she holds the look, forearm resting on the railing. Background in real time: the helicopter flies across the sky with its spotlight sweeping, car headlights drive along the street below. Same woman, same face and features as the first frame throughout, she does not talk. Photorealistic, no distortion, no extra people, no text.";T['ip06']="Waist-up medium shot, cinematic night photo of [YOUR TWIN \u2014 e.g. petite woman in her 40s], [BODY TYPE \u2014 e.g. slim thick, athletic, toned defined abs]. [HAIR COLOR] hair in [HAIR STYLE]. [EYE COLOR] eyes, [SIMPLE JEWELRY \u2014 e.g. diamond stud earrings, wedding ring]. Open hot-pink leather moto jacket, black cropped tube top, black high-waisted jeans. She sits in a red vinyl booth of a retro 1980s diner, one forearm resting on the table beside a strawberry milkshake glass, the other hand relaxed in her lap, face toward the camera, soft natural closed-mouth smile. Framed from the waist up, her face large and clear in the frame. Behind her a large window with hot-pink and teal neon tube shapes glowing, chrome details, checkered floor, palm trees and a parked classic car visible outside at night. Hot-pink and teal neon glow on her face. Background sharp and in focus, deep depth of field. She is alone, both hands visible and natural. No text, no logos. Photorealistic, ultra-realistic skin texture with visible pores, modern phone camera look, cinematic color grade.";T['mp06']="Real-time speed, single continuous take, no cuts, no transitions, no speed ramps, no slow motion. Camera: a breathing tripod frame, no handheld shake, no pans. 0.0s to 2.0s: she glances out the window as headlights pass outside. 2.0s to 4.0s: she looks back at the camera with a soft smile. 4.0s to 5.0s: she holds the look. Background in real time: car headlights move past outside, the neon hums and glows. Same woman, same face and features as the first frame throughout, she does not talk. Photorealistic, no distortion, no extra people, no text.";
+document.querySelectorAll('.copy').forEach(b=>b.addEventListener('click',async()=>{const t=T[b.dataset.t];const o=b.textContent;
+ try{await navigator.clipboard.writeText(t);b.textContent='Copied ✓'}catch(e){b.textContent='Press and hold the prompt to copy'}setTimeout(()=>b.textContent=o,2000)}));
+</script>
+</body></html>
