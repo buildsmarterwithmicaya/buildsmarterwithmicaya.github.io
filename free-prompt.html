@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Your Free AI Twin Prompt · Build Smarter with Micaya</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@1,500;1,600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0B1A33;--navy2:#13284A;--navy3:#1A3460;--rg:#C9907A;--rg2:#E2B8A6;--ivory:#FAF6F1;--line:#E8DDD3;--ink:#1B2333;--mute:#6B7280}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Montserrat,sans-serif;background:var(--navy);color:#F6EEE7;line-height:1.55;font-size:15px}
+.preview{background:#FFF3D6;color:#7A5300;text-align:center;font-size:12px;font-weight:700;letter-spacing:.5px;padding:8px 12px}
+.wrap{max-width:520px;margin:0 auto;padding:0 18px}
+.top{display:flex;align-items:center;gap:10px;padding:22px 0 8px}
+.top .mark{font-weight:800;font-size:13px;letter-spacing:2.5px;text-transform:uppercase;line-height:1.25}
+.top .mark span{display:block;color:var(--rg2);font-weight:600;letter-spacing:3px;font-size:11px}
+.hero{position:relative;border-radius:18px;overflow:hidden;margin-top:12px;aspect-ratio:9/13;background:#000}
+.hero video{width:100%;height:100%;object-fit:cover;display:block}
+.hero .over{position:absolute;left:0;right:0;bottom:0;padding:22px 20px;background:rgba(11,26,51,.78)}
+.serif{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500}
+h1{font-weight:900;font-size:30px;line-height:1.06;color:#fff}
+h1 em{font-style:normal;color:var(--rg)}
+.hero p{color:#D9D2CC;font-size:14px;margin-top:8px}
+.sig{color:var(--rg2);font-size:17px;margin-top:6px}
+.btn{display:block;text-align:center;background:var(--rg);color:#fff;text-decoration:none;font-weight:800;font-size:14px;letter-spacing:.5px;padding:15px 18px;border-radius:40px;margin-top:14px;border:0;cursor:pointer;width:100%;font-family:Montserrat}
+.btn.ghost{background:transparent;border:1.5px solid var(--rg2);color:var(--rg2)}
+.btn.dark{background:var(--navy)}
+.sec{margin-top:34px}
+.kicker{font-size:11px;letter-spacing:3px;font-weight:700;color:var(--rg2);text-transform:uppercase}
+h2{font-weight:900;font-size:22px;color:#fff;margin:6px 0 8px;line-height:1.15}
+.muted{color:#C9C1BA;font-size:14px}
+.card{background:var(--navy2);border:1px solid #23406B;border-radius:16px;padding:18px;margin-top:14px}
+.light{background:var(--ivory);color:var(--ink);border:0}
+.light h3{color:var(--navy)}
+h3{font-weight:800;font-size:17px;color:#fff}
+.prod{display:grid;grid-template-columns:120px 1fr;gap:14px;align-items:center}
+.prod img,.prod video{width:120px;border-radius:10px;display:block}
+.prod video{height:160px;object-fit:cover}
+.price{font-weight:900;color:var(--rg);font-size:18px;margin-top:4px}
+.tag{display:inline-block;background:var(--rg);color:#fff;font-size:10px;font-weight:800;letter-spacing:2px;padding:4px 9px;border-radius:20px;margin-bottom:6px}
+.tag.soon{background:#2A4570}
+.small{font-size:13px;color:#C9C1BA;margin-top:4px}
+.light .small{color:var(--mute)}
+/* builder */
+.b label{display:block;font-size:11px;font-weight:800;letter-spacing:1.5px;color:var(--rg);margin:12px 0 5px;text-transform:uppercase}
+.b select,.b input,.b textarea{width:100%;font-family:Montserrat;font-size:14px;padding:11px 12px;border-radius:10px;border:1px solid var(--line);background:#fff;color:var(--ink)}
+.b textarea{min-height:76px;resize:vertical}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.out{background:var(--navy);color:#F6EEE7;border-radius:12px;padding:14px;margin-top:14px;font-size:13.5px;white-space:pre-wrap;line-height:1.6}
+.out b{color:var(--rg2);font-size:11px;letter-spacing:1.4px}
+.hint{font-size:12px;color:var(--mute);margin-top:6px}
+.tools{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.tool{background:var(--navy2);border:1px solid #23406B;border-radius:12px;padding:12px;font-size:13px}
+.tool b{display:block;color:#fff;font-size:14px}
+.tool span{color:#9FA9BD;font-size:12px}
+.studio{position:relative;border-radius:16px;overflow:hidden;margin-top:14px;display:grid;grid-template-columns:1fr 1fr;background:var(--navy2);border:1px solid #23406B}
+.studio img{width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block}
+.studio .t{padding:18px 16px}
+.step{display:flex;align-items:center;gap:9px;margin:22px 0 2px;font-weight:900;font-size:14px;color:var(--navy);padding-top:14px;border-top:1px solid var(--line)}
+.step:first-child{margin-top:0;padding-top:0;border-top:0}
+.lt{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--navy);color:var(--rg2);font-weight:900;font-size:13px;flex:none}
+.b label.chk{display:flex;align-items:center;gap:9px;text-transform:none;letter-spacing:0;font-weight:600;font-size:13.5px;color:var(--ink);margin:9px 0 0}
+.b label.chk input{width:18px;height:18px;flex:none;accent-color:var(--navy)}
+.refine{display:flex;gap:10px;align-items:flex-start;margin-top:14px;font-size:12.5px;color:var(--ink);line-height:1.55}
+.refine .lt{background:var(--rg);color:#fff}
+.signup{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+.signup input{font-family:Montserrat;font-size:15px;padding:14px 16px;border-radius:40px;border:1.5px solid #2E4C7A;background:#0F223F;color:#fff}
+.signup input::placeholder{color:#8B97AD}
+.signup .btn{margin-top:0}
+.fine{font-size:12px;color:#9FA9BD;margin-top:8px;text-align:center}
+.bh-form{margin-top:14px;min-height:120px}
+.done{display:none;background:var(--navy2);border:1px solid var(--rg);border-radius:14px;padding:14px;margin-top:14px;font-size:14px}
+footer{color:#7F8AA3;font-size:12px;text-align:center;padding:40px 18px 50px;line-height:1.7}
+footer a{color:var(--rg2)}
+
+.ph{position:relative;border-radius:18px;overflow:hidden;margin-top:12px;aspect-ratio:4/5;background:#000}
+.ph img{width:100%;height:100%;object-fit:cover;object-position:center 15%;display:block}
+.ph .over{position:absolute;left:0;right:0;bottom:0;padding:20px;background:rgba(11,26,51,.8)}
+.prompt{background:var(--ivory);color:var(--ink);border-radius:16px;padding:18px;margin-top:14px;font-size:14px;line-height:1.65}
+.prompt p{margin-top:10px}.prompt p:first-child{margin-top:0}
+.prompt .k{display:inline-block;font-weight:900;font-size:11px;letter-spacing:1.6px;color:var(--rg);margin-right:4px}
+.fill{background:#F3DED4;color:#7A3E2A;font-weight:800;padding:1px 6px;border-radius:6px}
+.steps .s{display:flex;gap:12px;margin-top:14px}
+.steps .n{flex:none;width:30px;height:30px;border-radius:50%;background:var(--rg);color:#fff;font-weight:900;display:flex;align-items:center;justify-content:center}
+.steps b{color:#fff}
+.tip{border-left:3px solid var(--rg);background:var(--navy2);border-radius:0 12px 12px 0;padding:14px 16px;margin-top:16px;font-size:14px;color:#D9D2CC}
+.mono{font-size:13px;background:#0F223F;border:1px solid #23406B;border-radius:10px;padding:10px 12px;margin-top:8px;color:#E6DED7}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><div class="mark">Build Smarter<span>with Micaya</span></div></div>
+  <div class="ph">
+    <img src="media/twin_coffee.jpg" alt="Micaya's AI twin with a morning coffee">
+    <div class="over">
+      <div class="kicker">Your free prompt</div>
+      <h1 style="margin-top:6px;font-size:27px">Golden Hour <em>Café</em></h1>
+      <p style="color:#D9D2CC;font-size:14px;margin-top:6px">The same SMARTER structure I use for every AI twin photo. Copy it, add your Twin Lock, and create.</p>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="kicker">Copy and paste</div>
+    <h2>The prompt</h2>
+    <div class="prompt" id="prompt">
+      <p><span class="k">SUBJECT:</span><span class="fill">[YOUR TWIN LOCK]</span>, wearing a cream linen button-up shirt with the sleeves rolled to her elbows.</p>
+      <p><span class="k">MOTION:</span>Sitting at a small marble café table, holding a cappuccino in both hands just below her chin, looking out the window with a soft, relaxed half-smile.</p>
+      <p><span class="k">ATMOSPHERE:</span>A sunlit corner café in late afternoon, a croissant on a small plate and an open notebook on the table, warm golden-hour light coming through the window from the left, calm, unhurried mood.</p>
+      <p><span class="k">REALISM &amp; STYLE:</span>Candid lifestyle photo, shot on a modern iPhone, natural HDR, photorealistic, natural skin texture with visible pores and small imperfections, true-to-life color.</p>
+      <p><span class="k">TECHNICAL:</span>Eye level, medium shot from the waist up, 35mm lens, focus on her eyes, the café behind her in sharp focus, vertical 4:5.</p>
+      <p><span class="k">EXCLUSIONS:</span>She is the only person in the frame. Realistic hands with five natural fingers, each hand with one clear job. Only her signature jewelry. Every object whole and physically real. Clean surfaces with no text, logos or watermarks. Her face matches the reference exactly.</p>
+    </div>
+    <button class="btn" id="copy">Copy the prompt</button>
+  </div>
+
+  <div class="sec steps">
+    <div class="kicker">How to use it</div>
+    <h2>Three steps</h2>
+    <div class="s"><div class="n">1</div><div><b>Write your Twin Lock.</b> <span class="muted">One line describing how you always look. It replaces <span class="fill">[YOUR TWIN LOCK]</span>. Be specific about hair color, since it's the first thing to drift.</span>
+      <div class="mono">Example: the same woman from my reference, dark brown hair in soft loose waves with a center part, brown eyes, small gold hoop earrings, natural makeup</div></div></div>
+    <div class="s"><div class="n">2</div><div><b>Paste it into your image tool.</b> <span class="muted">Use one that takes a trained character or reference photos, like Higgsfield Soul, Nano Banana Pro or GPT Image. No single tool is best for everyone, so try one generation on a low quality setting first to save credits.</span></div></div>
+    <div class="s"><div class="n">3</div><div><b>Check before you post.</b> <span class="muted">Zoom in on the hands, eyes, jewelry and edges. If something's off, change one part of the prompt at a time.</span></div></div>
+    <div class="tip"><b style="color:var(--rg2)">Credit-saving tip:</b> planning to turn this photo into a video? Keep the background in sharp focus, like this prompt does. A blurry background carries into the video. For a still photo, a soft background is fine.</div>
+  </div>
+
+  <div class="sec">
+    <div class="kicker">Want the full collection?</div>
+    <h2>60 more prompts like this one</h2>
+    <div class="card light prod">
+      <img src="media/pack_cover.jpg" alt="The Everyday AI Twin Prompt Pack cover">
+      <div><span class="tag">$19</span>
+        <h3>The Everyday AI Twin Prompt Pack</h3>
+        <div class="small">50 image prompts for everyday moments, soft-life and editorial scenes, plus 10 video motion prompts, the Twin Lock system, a realism checklist and a 7-day posting plan.</div>
+        <a class="btn dark" id="packlink" href="https://payhip.com/b/Dcal9" style="margin-top:8px;padding:11px">Get the pack →</a></div>
+    </div>
+    <div class="card prod">
+      <video src="media/kit_s.mp4" autoplay muted loop playsinline></video>
+      <div><span class="tag soon">COMING SOON</span>
+        <h3>Want to turn it into a video?</h3>
+        <div class="small">The AI Twin Video Kit shows you how to turn your twin photos into B-roll and talking videos, step by step. Subscribers hear first.</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="kicker">The Studio</div>
+    <h2>Build Smarter AI Content Studio</h2>
+    <div class="studio">
+      <img src="media/twin_studio.jpg" alt="Micaya's AI twin in her AI content studio">
+      <div class="t">
+        <div class="tag">DOORS OPEN DEC 25</div>
+        <p class="small" style="color:#D9D2CC">Step-by-step lessons to create your AI twin, clone your voice, make her talk and turn your content into income, with a community of women building alongside you.</p>
+        <p class="small" style="margin-top:8px">One-time payment. Lifetime access.</p>
+      </div>
+    </div>
+    <a class="btn ghost" href="https://buildsmarterwithmicaya.github.io/#studio">Join the early-access list →</a>
+  </div>
+</div>
+<footer>Every image and video on this page is my AI twin, made with AI.<br>@buildsmarterwithmicaya · Instagram · TikTok · Facebook · YouTube<br>© 2026 Build Smarter with Micaya</footer>
+<script>
+document.getElementById('copy').addEventListener('click',async()=>{
+  const t=[...document.querySelectorAll('#prompt p')].map(p=>p.innerText.replace(/^([A-Z &]+:)\s*/,'$1 ')).join('\n');
+  const b=document.getElementById('copy');
+  try{await navigator.clipboard.writeText(t);b.textContent='Copied ✓'}
+  catch(e){const r=document.createRange();r.selectNodeContents(document.getElementById('prompt'));const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selected: press copy'}
+});
+</script>
+</body>
+</html>
