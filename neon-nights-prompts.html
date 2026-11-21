@@ -88,6 +88,10 @@ footer a{color:var(--rg2)}
 .lock{background:var(--navy2);border:1px solid #23406B;border-radius:16px;padding:18px;margin-top:16px}
 .lock h3{margin-bottom:6px}
 .lock .muted b{color:#fff}
+.price .was,.tag .was{opacity:.6;font-weight:600;margin-right:3px}
+.salebar[hidden]{display:none!important}
+.salebar{display:block;background:linear-gradient(90deg,#C98E79,#E3B7A5);color:#0B1A33;text-align:center;font-weight:800;font-size:12px;letter-spacing:1.5px;padding:10px 12px;border-radius:12px;margin:12px 0 4px}
+.salebar span{display:block;font-weight:600;letter-spacing:.3px;font-size:12px;margin-top:2px}
 </style></head><body><div class="wrap"><div class="top"><div class="mark">Build Smarter<span>with Micaya</span></div></div>
   <div class="sec" style="margin-top:18px">
     <div class="kicker">You're in · GTA 6-inspired</div>
@@ -193,16 +197,17 @@ footer a{color:var(--rg2)}
   <div class="sec">
     <div class="kicker">Ready for more?</div>
     <h2>Make your twin the main character every day</h2>
+    <div class="salebar sale-only" hidden>BLACK FRIDAY SALE · ABOUT 30% OFF EVERY KIT<span>Ends Monday, Nov 30 at 11:59 PM ET</span></div>
     <div class="card light prod">
       <img src="media/pack_cover.jpg" alt="The Everyday AI Twin Prompt Pack cover">
-      <div><span class="tag">$19</span>
+      <div><span class="tag" data-reg="$19" data-sale="$13">$19</span>
         <h3>The Everyday AI Twin Prompt Pack</h3>
         <div class="small">50 image prompts and 10 video motion prompts for real life: work, soft life, travel, editorial and more.</div>
         <a class="btn dark" href="https://payhip.com/b/Dcal9" style="margin-top:8px;padding:11px">Get the pack →</a></div>
     </div>
     <div class="card prod">
       <video src="media/neon-nights/kit_walk_v1.mp4" autoplay muted loop playsinline></video>
-      <div><span class="tag">$29</span>
+      <div><span class="tag" data-reg="$29" data-sale="$20">$29</span>
         <h3>The AI Twin Video Kit</h3>
         <div class="small">Turn your twin images into B-roll and talking videos, using the same real-time workflow you just learned.</div>
         <a class="btn" href="https://payhip.com/b/Dt7jJ" style="margin-top:8px;padding:11px">Get the kit →</a></div>
@@ -210,7 +215,7 @@ footer a{color:var(--rg2)}
     <div class="card light prod">
       <img src="media/bundle_cover.jpg" alt="The AI Creator Bundle" style="height:auto">
       <div><span class="tag">BEST VALUE</span>
-        <h3>All three kits for $67</h3>
+        <h3>All three kits for <span data-reg="$67" data-sale="$47">$67</span></h3>
         <div class="small">The Prompt Pack, the Video Kit and the AI Content Automation Kit together ($95 separately).</div>
         <a class="btn dark" href="https://payhip.com/b/TSWRq" style="margin-top:8px;padding:11px">Get the bundle →</a></div>
     </div>
@@ -222,4 +227,5 @@ const T={};T['ip01']="Waist-up medium shot, cinematic sunset photo of [YOUR TWIN
 document.querySelectorAll('.copy').forEach(b=>b.addEventListener('click',async()=>{const t=T[b.dataset.t];const o=b.textContent;
  try{await navigator.clipboard.writeText(t);b.textContent='Copied ✓'}catch(e){b.textContent='Press and hold the prompt to copy'}setTimeout(()=>b.textContent=o,2000)}));
 </script>
+<script src="assets/sale.js"></script>
 </body></html>

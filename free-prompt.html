@@ -95,6 +95,10 @@ footer a{color:var(--rg2)}
 .look .copy{margin-top:12px}
 .num{display:inline-block;background:var(--rg);color:#fff;font-weight:900;font-size:11px;letter-spacing:2px;padding:4px 10px;border-radius:20px}
 ul.ideas{margin:10px 0 0 18px;color:#D9D2CC;font-size:14px}ul.ideas li{margin-top:6px}
+.price .was,.tag .was{opacity:.6;font-weight:600;margin-right:3px}
+.salebar[hidden]{display:none!important}
+.salebar{display:block;background:linear-gradient(90deg,#C98E79,#E3B7A5);color:#0B1A33;text-align:center;font-weight:800;font-size:12px;letter-spacing:1.5px;padding:10px 12px;border-radius:12px;margin:12px 0 4px}
+.salebar span{display:block;font-weight:600;letter-spacing:.3px;font-size:12px;margin-top:2px}
 </style></head>
 <body>
 <div class="wrap">
@@ -162,16 +166,17 @@ ul.ideas{margin:10px 0 0 18px;color:#D9D2CC;font-size:14px}ul.ideas li{margin-to
   <div class="sec">
     <div class="kicker">Want the full collection?</div>
     <h2>60 more prompts for everyday content</h2>
+    <div class="salebar sale-only" hidden>BLACK FRIDAY SALE · ABOUT 30% OFF EVERY KIT<span>Ends Monday, Nov 30 at 11:59 PM ET</span></div>
     <div class="card light prod">
       <img src="media/pack_cover.jpg" alt="The Everyday AI Twin Prompt Pack cover">
-      <div><span class="tag">$19</span>
+      <div><span class="tag" data-reg="$19" data-sale="$13">$19</span>
         <h3>The Everyday AI Twin Prompt Pack</h3>
         <div class="small">50 image prompts for everyday moments, soft-life and editorial scenes, plus 10 video motion prompts, the Twin Lock system, a realism checklist and a 7-day posting plan.</div>
         <a class="btn dark" href="https://payhip.com/b/Dcal9" style="margin-top:8px;padding:11px">Get the pack →</a></div>
     </div>
     <div class="card prod">
       <video src="media/kit_s.mp4" autoplay muted loop playsinline></video>
-      <div><span class="tag">$29</span>
+      <div><span class="tag" data-reg="$29" data-sale="$20">$29</span>
         <h3>Want to turn it into a video?</h3>
         <div class="small">The AI Twin Video Kit shows you how to turn your twin photos into B-roll and talking videos, step by step.</div>
         <a class="btn" href="https://payhip.com/b/Dt7jJ" style="margin-top:8px;padding:11px">Get the kit →</a></div>
@@ -179,7 +184,7 @@ ul.ideas{margin:10px 0 0 18px;color:#D9D2CC;font-size:14px}ul.ideas li{margin-to
     <div class="card light prod">
       <img src="media/bundle_cover.jpg" alt="The AI Creator Bundle" style="height:auto">
       <div><span class="tag">BEST VALUE</span>
-        <h3>All three kits for $67</h3>
+        <h3>All three kits for <span data-reg="$67" data-sale="$47">$67</span></h3>
         <div class="small">The Prompt Pack, the Video Kit and the AI Content Automation Kit together ($95 separately).</div>
         <a class="btn dark" href="https://payhip.com/b/TSWRq" style="margin-top:8px;padding:11px">Get the bundle →</a></div>
     </div>
@@ -208,5 +213,6 @@ document.querySelectorAll('.cp').forEach(function(b){var label=b.textContent;b.a
   catch(e){var r=document.createRange();r.selectNodeContents(box);var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selected: press copy'}
 });});
 </script>
+<script src="assets/sale.js"></script>
 </body>
 </html>

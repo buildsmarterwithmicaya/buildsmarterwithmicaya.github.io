@@ -74,6 +74,10 @@ h3{font-weight:800;font-size:17px;color:#fff}
 .done{display:none;background:var(--navy2);border:1px solid var(--rg);border-radius:14px;padding:14px;margin-top:14px;font-size:14px}
 footer{color:#7F8AA3;font-size:12px;text-align:center;padding:40px 18px 50px;line-height:1.7}
 footer a{color:var(--rg2)}
+.price .was,.tag .was{opacity:.6;font-weight:600;margin-right:3px}
+.salebar[hidden]{display:none!important}
+.salebar{display:block;background:linear-gradient(90deg,#C98E79,#E3B7A5);color:#0B1A33;text-align:center;font-weight:800;font-size:12px;letter-spacing:1.5px;padding:10px 12px;border-radius:12px;margin:12px 0 4px}
+.salebar span{display:block;font-weight:600;letter-spacing:.3px;font-size:12px;margin-top:2px}
 </style>
 </head>
 <body>
@@ -90,6 +94,7 @@ footer a{color:var(--rg2)}
       <div class="serif sig">Micaya + my AI twin</div>
     </div>
   </div>
+  <a class="salebar sale-only" href="#shop" hidden style="text-decoration:none">BLACK FRIDAY SALE · SHOP THE KITS ↓<span>Ends Monday, Nov 30 at 11:59 PM ET</span></a>
   <a class="btn" href="#free-prompt">Get my free photoshoot kit →</a>
 
   <div class="sec" id="free-prompt">
@@ -100,15 +105,16 @@ footer a{color:var(--rg2)}
     <div class="fine">You'll also get Build Smarter Weekly, my free AI tips email. Unsubscribe anytime.</div>
   </div>
 
-  <div class="sec">
+  <div class="sec" id="shop">
     <div class="kicker">Shop</div>
+    <div class="salebar sale-only" hidden>BLACK FRIDAY SALE · ABOUT 30% OFF EVERY KIT<span>Ends Monday, Nov 30 at 11:59 PM ET</span></div>
     <h2>Done-for-you kits</h2>
     <div class="card light prod">
       <img src="media/pack_cover.jpg" alt="The Everyday AI Twin Prompt Pack cover">
       <div><span class="tag">NEW</span>
         <h3>The Everyday AI Twin Prompt Pack</h3>
         <div class="small">60 copy-and-paste prompts: everyday moments, soft-life scenes and video motion, plus the system that keeps her looking like you.</div>
-        <div class="price">$19</div>
+        <div class="price" data-reg="$19" data-sale="$13">$19</div>
         <a class="btn dark" href="https://payhip.com/b/Dcal9" style="margin-top:8px;padding:11px">Get the pack →</a></div>
     </div>
     <div class="card prod">
@@ -116,7 +122,7 @@ footer a{color:var(--rg2)}
       <div><span class="tag">NEW</span>
         <h3>The AI Twin Video Kit</h3>
         <div class="small">Turn your twin images into B-roll and talking videos, step by step, with watch-and-copy examples.</div>
-        <div class="price">$29</div>
+        <div class="price" data-reg="$29" data-sale="$20">$29</div>
         <a class="btn" href="https://payhip.com/b/Dt7jJ" style="margin-top:8px;padding:11px">Get the kit →</a></div>
     </div>
     <div class="card light prod">
@@ -124,7 +130,7 @@ footer a{color:var(--rg2)}
       <div><span class="tag">NEW</span>
         <h3>The AI Content Automation Kit</h3>
         <div class="small">Claude drafts your week. You approve. Then you create. A ready-made Notion template plus the step-by-step guide to plan a full week of content in about 20 minutes.</div>
-        <div class="price">$47</div>
+        <div class="price" data-reg="$47" data-sale="$33">$47</div>
         <a class="btn dark" href="https://payhip.com/b/r04HE" style="margin-top:8px;padding:11px">Get the kit →</a></div>
     </div>
     <div class="card bundle">
@@ -132,7 +138,7 @@ footer a{color:var(--rg2)}
       <span class="tag">BEST VALUE</span>
       <h3>The AI Creator Bundle</h3>
       <div class="small">All three kits. One price. The prompts, the videos and the system that plans your week.</div>
-      <div class="price"><s class="was">$95</s> $67</div>
+      <div class="price"><span data-reg="$67" data-sale="$47">$67</span> <span class="small" style="opacity:.75">($95 value)</span></div>
       <a class="btn" href="https://payhip.com/b/TSWRq" style="margin-top:8px;padding:11px">Get all three →</a>
     </div>
   </div>
@@ -405,5 +411,6 @@ document.addEventListener('beehiiv:form-suppressed',function(e){var s=e.target;v
 var free=(s.getAttribute('data-beehiiv-form')||'').indexOf('06efd89d')===0;
 box.insertAdjacentHTML('beforeend', free ? '<p class="muted" style="text-align:center;margin-bottom:4px">You\'re already on the list. Welcome back!</p><a class="btn" href="free-prompt.html">Get my free kit →</a>' : '<p class="muted" style="text-align:center">You\'re already on the list. I\'ll email you the moment doors open.</p>');},true);
 </script>
+<script src="assets/sale.js"></script>
 </body>
 </html>
