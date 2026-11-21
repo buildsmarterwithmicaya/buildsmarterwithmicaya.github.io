@@ -7,5 +7,6 @@
   document.querySelectorAll('[data-sale]').forEach(function(el){
     el.innerHTML = '<s class="was">' + el.getAttribute('data-reg') + '</s> ' + el.getAttribute('data-sale');
   });
+  document.querySelectorAll('[data-saletag]').forEach(function(el){ el.textContent = el.getAttribute('data-saletag'); });
   document.querySelectorAll('.sale-only').forEach(function(el){ el.hidden = false; });
 })();
