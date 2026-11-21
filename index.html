@@ -36,6 +36,8 @@ h3{font-weight:800;font-size:17px;color:#fff}
 .prod{display:grid;grid-template-columns:120px 1fr;gap:14px;align-items:center}
 .prod img,.prod video{width:120px;border-radius:10px;display:block}
 .prod video{height:160px;object-fit:cover}
+.bundle img{width:100%;border-radius:10px;display:block;margin-bottom:12px}
+.price .was{opacity:.55;font-weight:600;font-size:.75em;margin-right:4px}
 .price{font-weight:900;color:var(--rg);font-size:18px;margin-top:4px}
 .tag{display:inline-block;background:var(--rg);color:#fff;font-size:10px;font-weight:800;letter-spacing:2px;padding:4px 9px;border-radius:20px;margin-bottom:6px}
 .tag.soon{background:#2A4570}
@@ -111,10 +113,27 @@ footer a{color:var(--rg2)}
     </div>
     <div class="card prod">
       <video src="media/kit_s.mp4" autoplay muted loop playsinline></video>
-      <div><span class="tag soon">COMING SOON</span>
+      <div><span class="tag">NEW</span>
         <h3>The AI Twin Video Kit</h3>
         <div class="small">Turn your twin images into B-roll and talking videos, step by step, with watch-and-copy examples.</div>
-        <div class="price">$29</div></div>
+        <div class="price">$29</div>
+        <a class="btn" href="https://payhip.com/b/Dt7jJ" style="margin-top:8px;padding:11px">Get the kit →</a></div>
+    </div>
+    <div class="card light prod">
+      <img src="media/automation_cover.jpg" alt="The AI Content Automation Kit cover">
+      <div><span class="tag">NEW</span>
+        <h3>The AI Content Automation Kit</h3>
+        <div class="small">Claude drafts your week. You approve. Then you create. A ready-made Notion template plus the step-by-step guide to plan a full week of content in about 20 minutes.</div>
+        <div class="price">$47</div>
+        <a class="btn dark" href="https://payhip.com/b/r04HE" style="margin-top:8px;padding:11px">Get the kit →</a></div>
+    </div>
+    <div class="card bundle">
+      <img src="media/bundle_cover.jpg" alt="The AI Creator Bundle: all three kits">
+      <span class="tag">BEST VALUE</span>
+      <h3>The AI Creator Bundle</h3>
+      <div class="small">All three kits. One price. The prompts, the videos and the system that plans your week.</div>
+      <div class="price"><s class="was">$95</s> $67</div>
+      <a class="btn" href="https://payhip.com/b/TSWRq" style="margin-top:8px;padding:11px">Get all three →</a>
     </div>
   </div>
 
